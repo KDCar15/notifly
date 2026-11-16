@@ -12,7 +12,7 @@ import java.util.List;
  * @author charly
  */
 @javax.persistence.Entity
-@javax.persistence.Table(name = "tipos_nota")
+@javax.persistence.Table(name = "gestion.tipos_nota")
 @javax.persistence.NamedQueries({
     @javax.persistence.NamedQuery(name = "TiposNota.findAll", query = "SELECT t FROM TiposNota t"),
     @javax.persistence.NamedQuery(name = "TiposNota.findByIdTiponota", query = "SELECT t FROM TiposNota t WHERE t.idTiponota = :idTiponota"),

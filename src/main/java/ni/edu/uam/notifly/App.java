@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 import ni.edu.uam.notifly.dao.Dao;
+import ni.edu.uam.notifly.entity.EstadosNota;
 import ni.edu.uam.notifly.entity.Notas;
 
 /**
@@ -36,9 +37,14 @@ public class App extends Application {
 
     public static void main(String[] args) {
         Dao dao = new Dao();
-        List<Notas> notas = dao.getAll("Notas.findAll", Notas.class);
-        notas.forEach(System.out::println);
-        // launch();s
+        List<EstadosNota> notas = dao.getAll("EstadosNota.findAll", EstadosNota.class);
+        // launch();
+        System.out.println("Ejemplo");
+        for (EstadosNota nota : notas) {
+            System.out.println(nota.getNombreEstado());
+        }
+        System.out.println("Ejemplo 2");
+        return;
     }
 
 }

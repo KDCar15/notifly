@@ -12,7 +12,7 @@ import java.util.Date;
  * @author charly
  */
 @javax.persistence.Entity
-@javax.persistence.Table(name = "notas")
+@javax.persistence.Table(name = "gestion.notas")
 @javax.persistence.NamedQueries({
     @javax.persistence.NamedQuery(name = "Notas.findAll", query = "SELECT n FROM Notas n"),
     @javax.persistence.NamedQuery(name = "Notas.findByIdNota", query = "SELECT n FROM Notas n WHERE n.idNota = :idNota"),
