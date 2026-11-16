@@ -7,6 +7,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.List;
+import ni.edu.uam.notifly.dao.Dao;
+import ni.edu.uam.notifly.entity.Notas;
 
 /**
  * JavaFX App
@@ -32,7 +35,10 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        launch();
+        Dao dao = new Dao();
+        List<Notas> notas = dao.getAll("Notas.findAll", Notas.class);
+        notas.forEach(System.out::println);
+        // launch();s
     }
 
 }
