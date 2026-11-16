@@ -14,6 +14,7 @@ module ni.edu.uam.notifly {
             org.eclipse.persistence.jpa;
 
     opens ni.edu.uam.notifly to javafx.fxml;
+    opens ni.edu.uam.notifly.controller to javafx.fxml;
 
     exports ni.edu.uam.notifly;
 }

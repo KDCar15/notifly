@@ -5,12 +5,12 @@ import javafx.fxml.FXML;
 
 public class MainScreenController {
     @FXML
-    public void mostrar_sugerencias(){
-        System.out.println("Cambiando a pantalla de sugerencias...");
+    public void mostrar_notas(){
+        System.out.println("Cambiando a pantalla de notas...");
     }
     @FXML
-    public void mostrar_quejas(){
-        System.out.println("Cambiando a pantalla de quejas...");
+    public void mostrar_plantillas(){
+        System.out.println("Cambiando a pantalla de plantillas de correo...");
     }
     @FXML
     public void mostrar_historial(){

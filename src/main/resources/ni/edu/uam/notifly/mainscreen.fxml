@@ -50,8 +50,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#mostrar_sugerencias" prefHeight="24.0" prefWidth="200.0" text="Sugerencias" />
-                  <Button mnemonicParsing="false" onAction="#mostrar_quejas" prefHeight="24.0" prefWidth="200.0" text="Quejas" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_notas" prefHeight="24.0" prefWidth="200.0" text="Notas" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_plantillas" prefHeight="24.0" prefWidth="200.0" text="Plantillas" GridPane.columnIndex="1" />
                   <Button mnemonicParsing="false" onAction="#mostrar_historial" prefHeight="24.0" prefWidth="200.0" text="Historial" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" onAction="#salir" prefHeight="24.0" prefWidth="200.0" text="Salir" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>

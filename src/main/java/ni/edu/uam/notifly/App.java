@@ -21,7 +21,7 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"));
+        scene = new Scene(loadFXML("mainscreen"));
         stage.setScene(scene);
         stage.show();
     }
@@ -36,15 +36,7 @@ public class App extends Application {
     }
 
     public static void main(String[] args) {
-        Dao dao = new Dao();
-        List<EstadosNota> notas = dao.getAll("EstadosNota.findAll", EstadosNota.class);
-        // launch();
-        System.out.println("Ejemplo");
-        for (EstadosNota nota : notas) {
-            System.out.println(nota.getNombreEstado());
-        }
-        System.out.println("Ejemplo 2");
-        return;
+        launch();
     }
 
 }
