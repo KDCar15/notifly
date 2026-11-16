@@ -1,9 +1,9 @@
-package ni.edu.uam.notifly;
+package ni.edu.uam.notifly.controller;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
 
-public class PrimaryController {
+public class MainScreenController {
     @FXML
     public void mostrar_sugerencias(){
         System.out.println("Cambiando a pantalla de sugerencias...");
