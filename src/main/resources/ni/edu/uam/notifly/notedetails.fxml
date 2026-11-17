@@ -14,7 +14,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox>
@@ -42,10 +41,10 @@
                         <Label text="Facultad" GridPane.rowIndex="1" />
                         <Label text="Correo" GridPane.rowIndex="2" />
                         <Label text="Celular" GridPane.rowIndex="3" />
-                        <TextField disable="true" GridPane.columnIndex="1" />
-                        <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextField disable="true" promptText="Nombre1 Apellido1" GridPane.columnIndex="1" />
+                        <TextField disable="true" promptText="Correo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField disable="true" promptText="Celular" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox disable="true" prefWidth="300.0" promptText="Facultad" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <Label text="Información del reporte">
@@ -68,11 +67,11 @@
                         <Label text="Categoría" GridPane.rowIndex="1" />
                         <Label text="Fecha y hora" />
                         <Label text="Área involucrada" GridPane.rowIndex="2" />
-                        <ComboBox prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ComboBox disable="true" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField disable="true" GridPane.columnIndex="1" />
+                        <ComboBox prefWidth="300.0" promptText="Seleccione un área" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox disable="true" prefWidth="300.0" promptText="Categoria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField disable="true" promptText="15/04/2026 12:00 AM" GridPane.columnIndex="1" />
                         <Label alignment="TOP_CENTER" text="Descripción" GridPane.rowIndex="3" />
-                        <TextArea disable="true" prefHeight="100.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextArea disable="true" prefHeight="100.0" prefWidth="200.0" promptText="Descripción de la nota" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>
@@ -80,9 +79,9 @@
                   <Insets right="15.0" />
                </padding>
             </VBox>
-            <VBox prefHeight="200.0" spacing="15.0">
+            <VBox spacing="15.0">
                <children>
-                  <Label text="Checklist">
+                  <Label text="Lista de cotejo">
                      <font>
                         <Font name="System Bold" size="13.0" />
                      </font>
@@ -110,7 +109,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="96.0" prefWidth="300.0" wrapText="true" />
+                  <TextArea prefHeight="139.0" prefWidth="300.0" promptText="Aquí se mostrarán las observaciones que haya introducido." wrapText="true" />
                </children>
                <padding>
                   <Insets left="15.0" />

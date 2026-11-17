@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <Label text="Criterios de búsqueda">
@@ -40,22 +39,22 @@
             <ComboBox fx:id="cb_categoria" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="3" />
             <Label text="Categoría" GridPane.columnIndex="2" />
             <Label text="Desde la fecha" GridPane.rowIndex="3" />
-            <Button fx:id="bt_fecha" mnemonicParsing="false" prefWidth="300.0" text="Seleccionar fecha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button mnemonicParsing="false" prefWidth="300.0" text="Seleccionar fecha" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Button fx:id="bt_fecha" mnemonicParsing="false" onAction="#seleccionar_fecha_inicio" prefWidth="300.0" text="Seleccionar fecha" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button mnemonicParsing="false" onAction="#seleccionar_fecha_fin" prefWidth="300.0" text="Seleccionar fecha" GridPane.columnIndex="3" GridPane.rowIndex="3" />
             <Label text="Hasta la fecha" GridPane.columnIndex="2" GridPane.rowIndex="3" />
             <Label text="Estado" GridPane.rowIndex="1" />
             <Label text="Facultad" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <ComboBox prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <ComboBox prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cb_estado" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cb_facultad" prefWidth="300.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cb_area" prefWidth="300.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Área involucrada" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="600.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" text="Buscar" />
-            <Button mnemonicParsing="false" text="Limpiar" />
-            <Button mnemonicParsing="false" text="Visualizar" />
+            <Button mnemonicParsing="false" onAction="#buscar" text="Buscar" />
+            <Button mnemonicParsing="false" onAction="#limpiar" text="Limpiar" />
+            <Button mnemonicParsing="false" onAction="#visualizar" text="Visualizar" />
          </children>
       </HBox>
       <Label text="Resultados">
@@ -63,10 +62,15 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TableView prefHeight="346.0" prefWidth="570.0">
+      <TableView fx:id="tv_resultados" prefHeight="346.0" prefWidth="570.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="120.0" text="Último acceso" />
+            <TableColumn prefWidth="60.0" text="No." />
+            <TableColumn prefWidth="120.0" text="Tipo" />
+          <TableColumn prefWidth="120.0" text="Facultad" />
+            <TableColumn minWidth="1.0" prefWidth="120.0" text="Categoría" />
+            <TableColumn prefWidth="120.0" text="Área" />
+            <TableColumn prefWidth="120.0" text="Estado" />
         </columns>
       </TableView>
    </children>
