@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.HistoryController">
    <children>
       <Label text="Criterios de búsqueda">
          <font>
@@ -64,13 +64,13 @@
       </Label>
       <TableView fx:id="tv_resultados" prefHeight="346.0" prefWidth="570.0">
         <columns>
-          <TableColumn prefWidth="120.0" text="Último acceso" />
-            <TableColumn prefWidth="60.0" text="No." />
-            <TableColumn prefWidth="120.0" text="Tipo" />
-          <TableColumn prefWidth="120.0" text="Facultad" />
-            <TableColumn minWidth="1.0" prefWidth="120.0" text="Categoría" />
-            <TableColumn prefWidth="120.0" text="Área" />
-            <TableColumn prefWidth="120.0" text="Estado" />
+          <TableColumn fx:id="tc_acceso" prefWidth="120.0" text="Último acceso" />
+            <TableColumn fx:id="tc_id" prefWidth="60.0" text="No." />
+            <TableColumn fx:id="tc_tipo" prefWidth="120.0" text="Tipo" />
+          <TableColumn fx:id="tc_facultad" prefWidth="120.0" text="Facultad" />
+            <TableColumn fx:id="tc_categoria" minWidth="1.0" prefWidth="120.0" text="Categoría" />
+            <TableColumn fx:id="tc_area" prefWidth="120.0" text="Área" />
+            <TableColumn fx:id="tc_estado" prefWidth="120.0" text="Estado" />
         </columns>
       </TableView>
    </children>

@@ -4,10 +4,51 @@
  */
 package ni.edu.uam.notifly.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+
 /**
  *
  * @author charly
  */
 public class NoteListController {
+    // FXML
+    @FXML
+    private ComboBox cb_tipo;
+    @FXML
+    private ComboBox cb_categoria;
     
+    // Tabla
+    @FXML
+    private TableView tv_resultados;
+    @FXML
+    private TableColumn tc_id;
+    @FXML
+    private TableColumn tc_tipo;
+    @FXML
+    private TableColumn tc_fecha;
+    @FXML
+    private TableColumn tc_categoria;
+    @FXML
+    private TableColumn tc_resumen;
+    
+    // Funciones
+    @FXML
+    public void seleccionar_fecha_inicio(){
+    
+    }
+    @FXML
+    public void seleccionar_fecha_fin(){
+    
+    }
+    @FXML
+    public void buscar(){
+    
+    }
+    @FXML
+    public void limpiar(){
+    
+    }
 }

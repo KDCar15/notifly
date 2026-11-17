@@ -4,10 +4,31 @@
  */
 package ni.edu.uam.notifly.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+
 /**
  *
  * @author charly
  */
 public class TemplateEditorController {
+    @FXML
+    private TextField tf_templatename;
+    @FXML
+    private TextArea ta_templatecontents;
     
+    // Funciones
+    @FXML
+    public void aceptar(){
+    
+    }
+    @FXML
+    public void aplicar(){
+    
+    }
+    @FXML
+    public void cancelar(){
+    
+    }
 }
