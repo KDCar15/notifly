@@ -33,7 +33,7 @@
         </rowConstraints>
          <children>
             <Label text="Tipo" />
-            <ComboBox fx:id="cb_tipo" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cb_tipo" onAction="#cb_tipo" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="1" />
             <ComboBox fx:id="cb_categoria" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="3" />
             <Label text="Categoría" GridPane.columnIndex="2" />
             <Label text="Desde la fecha" GridPane.rowIndex="1" />
@@ -53,13 +53,13 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TableView prefHeight="346.0" prefWidth="570.0">
+      <TableView fx:id="tv_resultados" prefHeight="346.0" prefWidth="570.0">
         <columns>
-            <TableColumn prefWidth="75.0" text="No." />
-          <TableColumn prefWidth="75.0" text="Tipo" />
-          <TableColumn prefWidth="140.0" text="Fecha de emisión" />
-            <TableColumn prefWidth="132.0" text="Categoría" />
-            <TableColumn prefWidth="177.0" text="Resumen" />
+            <TableColumn fx:id="tc_id" prefWidth="75.0" text="No." />
+          <TableColumn fx:id="tc_tipo" prefWidth="75.0" text="Tipo" />
+          <TableColumn fx:id="tc_fecha" prefWidth="140.0" text="Fecha de emisión" />
+            <TableColumn fx:id="tc_categoria" prefWidth="132.0" text="Categoría" />
+            <TableColumn fx:id="tc_resumen" prefWidth="177.0" text="Resumen" />
         </columns>
       </TableView>
    </children>

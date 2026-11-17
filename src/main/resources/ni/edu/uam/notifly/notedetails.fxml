@@ -41,10 +41,10 @@
                         <Label text="Facultad" GridPane.rowIndex="1" />
                         <Label text="Correo" GridPane.rowIndex="2" />
                         <Label text="Celular" GridPane.rowIndex="3" />
-                        <TextField disable="true" promptText="Nombre1 Apellido1" GridPane.columnIndex="1" />
-                        <TextField disable="true" promptText="Correo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <TextField disable="true" promptText="Celular" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <ComboBox disable="true" prefWidth="300.0" promptText="Facultad" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="tf_nombresapellidos" disable="true" promptText="Nombre1 Apellido1" GridPane.columnIndex="1" />
+                        <TextField fx:id="tf_correo" disable="true" promptText="Correo" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <TextField fx:id="tf_celular" disable="true" promptText="Celular" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="cb_facultad" disable="true" prefWidth="300.0" promptText="Facultad" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                   <Label text="Información del reporte">
@@ -68,10 +68,10 @@
                         <Label text="Fecha y hora" />
                         <Label text="Área involucrada" GridPane.rowIndex="2" />
                         <ComboBox prefWidth="300.0" promptText="Seleccione un área" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                        <ComboBox disable="true" prefWidth="300.0" promptText="Categoria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                        <TextField disable="true" promptText="15/04/2026 12:00 AM" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="cb_area" disable="true" prefWidth="300.0" promptText="Categoria" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="tf_fechahora" disable="true" promptText="15/04/2026 12:00 AM" GridPane.columnIndex="1" />
                         <Label alignment="TOP_CENTER" text="Descripción" GridPane.rowIndex="3" />
-                        <TextArea disable="true" prefHeight="100.0" prefWidth="200.0" promptText="Descripción de la nota" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <TextArea fx:id="ta_descripcion" disable="true" prefHeight="100.0" prefWidth="200.0" promptText="Descripción de la nota" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                </children>
@@ -98,10 +98,10 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <CheckBox mnemonicParsing="false" text="Mandar correo a coordinador" />
-                        <CheckBox mnemonicParsing="false" text="Mandar correo a estudiante" GridPane.rowIndex="1" />
-                        <CheckBox mnemonicParsing="false" text="Recibir respuestas" GridPane.rowIndex="2" />
-                        <CheckBox mnemonicParsing="false" text="CheckBox" GridPane.rowIndex="3" />
+                        <CheckBox fx:id="checkb1" mnemonicParsing="false" text="Mandar correo a coordinador" />
+                        <CheckBox fx:id="checkb2" mnemonicParsing="false" text="Mandar correo a estudiante" GridPane.rowIndex="1" />
+                        <CheckBox fx:id="checkb3" mnemonicParsing="false" text="Recibir respuestas" GridPane.rowIndex="2" />
+                        <CheckBox fx:id="checkb4" mnemonicParsing="false" text="CheckBox" GridPane.rowIndex="3" />
                      </children>
                   </GridPane>
                   <Label text="Observaciones adicionales">
@@ -109,7 +109,7 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="139.0" prefWidth="300.0" promptText="Aquí se mostrarán las observaciones que haya introducido." wrapText="true" />
+                  <TextArea fx:id="ta_observaciones" prefHeight="139.0" prefWidth="300.0" promptText="Aquí se mostrarán las observaciones que haya introducido." wrapText="true" />
                </children>
                <padding>
                   <Insets left="15.0" />
@@ -119,9 +119,9 @@
       </HBox>
       <HBox alignment="TOP_RIGHT" prefHeight="0.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" text="Marcar como completada" />
-            <Button mnemonicParsing="false" text="Guardar" />
-            <Button mnemonicParsing="false" text="Cancelar" />
+            <Button mnemonicParsing="false" onAction="#marcar_completado" text="Marcar como completada" />
+            <Button mnemonicParsing="false" onAction="#guardar" text="Guardar" />
+            <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
          </children>
          <padding>
             <Insets top="15.0" />
