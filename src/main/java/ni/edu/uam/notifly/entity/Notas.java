@@ -29,12 +29,11 @@ import javax.persistence.TemporalType;
 @NamedQueries({
     @NamedQuery(name = "Notas.findAll", query = "SELECT n FROM Notas n"),
     @NamedQuery(name = "Notas.findByIdNota", query = "SELECT n FROM Notas n WHERE n.idNota = :idNota"),
-    @NamedQuery(name = "Notas.findByApellidos", query = "SELECT n FROM Notas n WHERE n.apellidos = :apellidos"),
-    @NamedQuery(name = "Notas.findByCelular", query = "SELECT n FROM Notas n WHERE n.celular = :celular"),
+    @NamedQuery(name = "Notas.findByNombresapellidos", query = "SELECT n FROM Notas n WHERE n.nombresapellidos = :nombresapellidos"),
     @NamedQuery(name = "Notas.findByCorreo", query = "SELECT n FROM Notas n WHERE n.correo = :correo"),
-    @NamedQuery(name = "Notas.findByDescripcion", query = "SELECT n FROM Notas n WHERE n.descripcion = :descripcion"),
+    @NamedQuery(name = "Notas.findByCelular", query = "SELECT n FROM Notas n WHERE n.celular = :celular"),
     @NamedQuery(name = "Notas.findByFechahora", query = "SELECT n FROM Notas n WHERE n.fechahora = :fechahora"),
-    @NamedQuery(name = "Notas.findByNombres", query = "SELECT n FROM Notas n WHERE n.nombres = :nombres")})
+    @NamedQuery(name = "Notas.findByDescripcion", query = "SELECT n FROM Notas n WHERE n.descripcion = :descripcion")})
 public class Notas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -43,30 +42,33 @@ public class Notas implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_nota")
     private Integer idNota;
-    @Column(name = "apellidos")
-    private String apellidos;
-    @Column(name = "celular")
-    private String celular;
+    @Basic(optional = false)
+    @Column(name = "nombresapellidos")
+    private String nombresapellidos;
+    @Basic(optional = false)
     @Column(name = "correo")
     private String correo;
+    @Basic(optional = false)
+    @Column(name = "celular")
+    private String celular;
+    @Basic(optional = false)
+    @Column(name = "fechahora")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date fechahora;
+    @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
-    @Column(name = "fechahora")
-    @Temporal(TemporalType.DATE)
-    private Date fechahora;
-    @Column(name = "nombres")
-    private String nombres;
     @JoinColumn(name = "id_area", referencedColumnName = "id_area")
     @ManyToOne
     private Areas idArea;
     @JoinColumn(name = "id_clasificacion", referencedColumnName = "id_clasificacion")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private Clasificaciones idClasificacion;
     @JoinColumn(name = "id_estadonota", referencedColumnName = "id_estadonota")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private EstadosNota idEstadonota;
     @JoinColumn(name = "id_tiponota", referencedColumnName = "id_tiponota")
-    @ManyToOne
+    @ManyToOne(optional = false)
     private TiposNota idTiponota;
 
     public Notas() {
@@ -74,6 +76,15 @@ public class Notas implements Serializable {
 
     public Notas(Integer idNota) {
         this.idNota = idNota;
+    }
+
+    public Notas(Integer idNota, String nombresapellidos, String correo, String celular, Date fechahora, String descripcion) {
+        this.idNota = idNota;
+        this.nombresapellidos = nombresapellidos;
+        this.correo = correo;
+        this.celular = celular;
+        this.fechahora = fechahora;
+        this.descripcion = descripcion;
     }
 
     public Integer getIdNota() {
@@ -84,20 +95,12 @@ public class Notas implements Serializable {
         this.idNota = idNota;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getNombresapellidos() {
+        return nombresapellidos;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getCelular() {
-        return celular;
-    }
-
-    public void setCelular(String celular) {
-        this.celular = celular;
+    public void setNombresapellidos(String nombresapellidos) {
+        this.nombresapellidos = nombresapellidos;
     }
 
     public String getCorreo() {
@@ -108,12 +111,12 @@ public class Notas implements Serializable {
         this.correo = correo;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getCelular() {
+        return celular;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCelular(String celular) {
+        this.celular = celular;
     }
 
     public Date getFechahora() {
@@ -124,12 +127,12 @@ public class Notas implements Serializable {
         this.fechahora = fechahora;
     }
 
-    public String getNombres() {
-        return nombres;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public Areas getIdArea() {

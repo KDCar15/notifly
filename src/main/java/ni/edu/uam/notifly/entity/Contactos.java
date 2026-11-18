@@ -5,16 +5,16 @@
 package ni.edu.uam.notifly.entity;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -26,11 +26,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Contactos.findAll", query = "SELECT c FROM Contactos c"),
     @NamedQuery(name = "Contactos.findByIdContacto", query = "SELECT c FROM Contactos c WHERE c.idContacto = :idContacto"),
-    @NamedQuery(name = "Contactos.findByApellidos", query = "SELECT c FROM Contactos c WHERE c.apellidos = :apellidos"),
+    @NamedQuery(name = "Contactos.findByNombresapellidos", query = "SELECT c FROM Contactos c WHERE c.nombresapellidos = :nombresapellidos"),
+    @NamedQuery(name = "Contactos.findByOcupacion", query = "SELECT c FROM Contactos c WHERE c.ocupacion = :ocupacion"),
     @NamedQuery(name = "Contactos.findByCelular", query = "SELECT c FROM Contactos c WHERE c.celular = :celular"),
-    @NamedQuery(name = "Contactos.findByCorreo", query = "SELECT c FROM Contactos c WHERE c.correo = :correo"),
-    @NamedQuery(name = "Contactos.findByNombres", query = "SELECT c FROM Contactos c WHERE c.nombres = :nombres"),
-    @NamedQuery(name = "Contactos.findByOcupacion", query = "SELECT c FROM Contactos c WHERE c.ocupacion = :ocupacion")})
+    @NamedQuery(name = "Contactos.findByCorreo", query = "SELECT c FROM Contactos c WHERE c.correo = :correo")})
 public class Contactos implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -39,24 +38,31 @@ public class Contactos implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_contacto")
     private Integer idContacto;
-    @Column(name = "apellidos")
-    private String apellidos;
+    @Basic(optional = false)
+    @Column(name = "nombresapellidos")
+    private String nombresapellidos;
+    @Basic(optional = false)
+    @Column(name = "ocupacion")
+    private String ocupacion;
     @Column(name = "celular")
     private String celular;
     @Column(name = "correo")
     private String correo;
-    @Column(name = "nombres")
-    private String nombres;
-    @Column(name = "ocupacion")
-    private String ocupacion;
-    @OneToMany(mappedBy = "idContacto")
-    private List<Areas> areasList;
+    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
+    @ManyToOne
+    private Areas idArea;
 
     public Contactos() {
     }
 
     public Contactos(Integer idContacto) {
         this.idContacto = idContacto;
+    }
+
+    public Contactos(Integer idContacto, String nombresapellidos, String ocupacion) {
+        this.idContacto = idContacto;
+        this.nombresapellidos = nombresapellidos;
+        this.ocupacion = ocupacion;
     }
 
     public Integer getIdContacto() {
@@ -67,12 +73,20 @@ public class Contactos implements Serializable {
         this.idContacto = idContacto;
     }
 
-    public String getApellidos() {
-        return apellidos;
+    public String getNombresapellidos() {
+        return nombresapellidos;
     }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
+    public void setNombresapellidos(String nombresapellidos) {
+        this.nombresapellidos = nombresapellidos;
+    }
+
+    public String getOcupacion() {
+        return ocupacion;
+    }
+
+    public void setOcupacion(String ocupacion) {
+        this.ocupacion = ocupacion;
     }
 
     public String getCelular() {
@@ -91,28 +105,12 @@ public class Contactos implements Serializable {
         this.correo = correo;
     }
 
-    public String getNombres() {
-        return nombres;
+    public Areas getIdArea() {
+        return idArea;
     }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
-    public String getOcupacion() {
-        return ocupacion;
-    }
-
-    public void setOcupacion(String ocupacion) {
-        this.ocupacion = ocupacion;
-    }
-
-    public List<Areas> getAreasList() {
-        return areasList;
-    }
-
-    public void setAreasList(List<Areas> areasList) {
-        this.areasList = areasList;
+    public void setIdArea(Areas idArea) {
+        this.idArea = idArea;
     }
 
     @Override

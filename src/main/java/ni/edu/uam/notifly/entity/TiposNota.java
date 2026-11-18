@@ -7,6 +7,7 @@ package ni.edu.uam.notifly.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,13 +18,12 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-
 /**
  *
  * @author charly
  */
 @Entity
-@Table(name = "gestion.tipos_nota"
+@Table(name = "gestion.tipos_nota")
 @NamedQueries({
     @NamedQuery(name = "TiposNota.findAll", query = "SELECT t FROM TiposNota t"),
     @NamedQuery(name = "TiposNota.findByIdTiponota", query = "SELECT t FROM TiposNota t WHERE t.idTiponota = :idTiponota"),
@@ -36,9 +36,10 @@ public class TiposNota implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_tiponota")
     private Integer idTiponota;
+    @Basic(optional = false)
     @Column(name = "nombre_tipo")
     private String nombreTipo;
-    @OneToMany(mappedBy = "idTiponota")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idTiponota")
     private List<Notas> notasList;
 
     public TiposNota() {
@@ -46,6 +47,11 @@ public class TiposNota implements Serializable {
 
     public TiposNota(Integer idTiponota) {
         this.idTiponota = idTiponota;
+    }
+
+    public TiposNota(Integer idTiponota, String nombreTipo) {
+        this.idTiponota = idTiponota;
+        this.nombreTipo = nombreTipo;
     }
 
     public Integer getIdTiponota() {

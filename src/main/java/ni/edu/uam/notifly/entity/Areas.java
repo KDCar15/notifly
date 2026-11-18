@@ -9,9 +9,9 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -26,21 +26,24 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Areas.findAll", query = "SELECT a FROM Areas a"),
     @NamedQuery(name = "Areas.findByIdArea", query = "SELECT a FROM Areas a WHERE a.idArea = :idArea"),
-    @NamedQuery(name = "Areas.findByNombreArea", query = "SELECT a FROM Areas a WHERE a.nombreArea = :nombreArea")})
+    @NamedQuery(name = "Areas.findByNombreArea", query = "SELECT a FROM Areas a WHERE a.nombreArea = :nombreArea"),
+    @NamedQuery(name = "Areas.findByEsFacultad", query = "SELECT a FROM Areas a WHERE a.esFacultad = :esFacultad")})
 public class Areas implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id_area")
     private Integer idArea;
     @Column(name = "nombre_area")
     private String nombreArea;
+    @Column(name = "es_facultad")
+    private Boolean esFacultad;
     @OneToMany(mappedBy = "idArea")
     private List<Notas> notasList;
-    @JoinColumn(name = "id_contacto", referencedColumnName = "id_contacto")
-    @ManyToOne
-    private Contactos idContacto;
+    @OneToMany(mappedBy = "idArea")
+    private List<Contactos> contactosList;
 
     public Areas() {
     }
@@ -65,6 +68,14 @@ public class Areas implements Serializable {
         this.nombreArea = nombreArea;
     }
 
+    public Boolean getEsFacultad() {
+        return esFacultad;
+    }
+
+    public void setEsFacultad(Boolean esFacultad) {
+        this.esFacultad = esFacultad;
+    }
+
     public List<Notas> getNotasList() {
         return notasList;
     }
@@ -73,12 +84,12 @@ public class Areas implements Serializable {
         this.notasList = notasList;
     }
 
-    public Contactos getIdContacto() {
-        return idContacto;
+    public List<Contactos> getContactosList() {
+        return contactosList;
     }
 
-    public void setIdContacto(Contactos idContacto) {
-        this.idContacto = idContacto;
+    public void setContactosList(List<Contactos> contactosList) {
+        this.contactosList = contactosList;
     }
 
     @Override

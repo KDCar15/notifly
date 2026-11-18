@@ -7,6 +7,7 @@ package ni.edu.uam.notifly.entity;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,9 +36,10 @@ public class Clasificaciones implements Serializable {
     @Basic(optional = false)
     @Column(name = "id_clasificacion")
     private Integer idClasificacion;
+    @Basic(optional = false)
     @Column(name = "nombre_clasificacion")
     private String nombreClasificacion;
-    @OneToMany(mappedBy = "idClasificacion")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idClasificacion")
     private List<Notas> notasList;
 
     public Clasificaciones() {
@@ -45,6 +47,11 @@ public class Clasificaciones implements Serializable {
 
     public Clasificaciones(Integer idClasificacion) {
         this.idClasificacion = idClasificacion;
+    }
+
+    public Clasificaciones(Integer idClasificacion, String nombreClasificacion) {
+        this.idClasificacion = idClasificacion;
+        this.nombreClasificacion = nombreClasificacion;
     }
 
     public Integer getIdClasificacion() {
