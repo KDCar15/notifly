@@ -1,4 +1,6 @@
 -- Esquema gestion
+INSERT INTO gestion.areas(nombre_area)
+
 INSERT INTO gestion.tipos_nota (nombre_tipo) VALUES
 ('Queja'), ('Sugerencia');
 
