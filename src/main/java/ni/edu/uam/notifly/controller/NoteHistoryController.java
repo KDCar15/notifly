@@ -16,7 +16,7 @@ import javafx.scene.control.TableView;
  *
  * @author charly
  */
-public class HistoryController implements Initializable{
+public class NoteHistoryController implements Initializable{
     @FXML
     private ComboBox cb_tipo;
     @FXML

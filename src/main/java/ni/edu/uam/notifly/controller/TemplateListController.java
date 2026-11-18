@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
  *
  * @author charly
  */
-public class TemplateViewController {
+public class TemplateListController {
     @FXML
     private TextField tf_busqueda;
     @FXML

@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
  *
  * @author charly
  */
-public class TemplateEditorController {
+public class TemplateDetailsController {
     @FXML
     private TextField tf_templatename;
     @FXML
