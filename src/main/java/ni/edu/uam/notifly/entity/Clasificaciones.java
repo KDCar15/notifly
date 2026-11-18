@@ -6,29 +6,38 @@ package ni.edu.uam.notifly.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author charly
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "gestion.clasificaciones")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "Clasificaciones.findAll", query = "SELECT c FROM Clasificaciones c"),
-    @javax.persistence.NamedQuery(name = "Clasificaciones.findByIdClasificacion", query = "SELECT c FROM Clasificaciones c WHERE c.idClasificacion = :idClasificacion"),
-    @javax.persistence.NamedQuery(name = "Clasificaciones.findByNombreClasificacion", query = "SELECT c FROM Clasificaciones c WHERE c.nombreClasificacion = :nombreClasificacion")})
+@Entity
+@Table(name = "gestion.clasificaciones")
+@NamedQueries({
+    @NamedQuery(name = "Clasificaciones.findAll", query = "SELECT c FROM Clasificaciones c"),
+    @NamedQuery(name = "Clasificaciones.findByIdClasificacion", query = "SELECT c FROM Clasificaciones c WHERE c.idClasificacion = :idClasificacion"),
+    @NamedQuery(name = "Clasificaciones.findByNombreClasificacion", query = "SELECT c FROM Clasificaciones c WHERE c.nombreClasificacion = :nombreClasificacion")})
 public class Clasificaciones implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "id_clasificacion")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_clasificacion")
     private Integer idClasificacion;
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "nombre_clasificacion")
+    @Column(name = "nombre_clasificacion")
     private String nombreClasificacion;
-    @javax.persistence.OneToMany(mappedBy = "idClasificacion")
+    @OneToMany(mappedBy = "idClasificacion")
     private List<Notas> notasList;
 
     public Clasificaciones() {
@@ -36,11 +45,6 @@ public class Clasificaciones implements Serializable {
 
     public Clasificaciones(Integer idClasificacion) {
         this.idClasificacion = idClasificacion;
-    }
-
-    public Clasificaciones(Integer idClasificacion, String nombreClasificacion) {
-        this.idClasificacion = idClasificacion;
-        this.nombreClasificacion = nombreClasificacion;
     }
 
     public Integer getIdClasificacion() {
@@ -89,7 +93,7 @@ public class Clasificaciones implements Serializable {
 
     @Override
     public String toString() {
-        return "ni.edu.uam.notifly.model.Clasificaciones[ idClasificacion=" + idClasificacion + " ]";
+        return "ni.edu.uam.notifly.entity.Clasificaciones[ idClasificacion=" + idClasificacion + " ]";
     }
     
 }

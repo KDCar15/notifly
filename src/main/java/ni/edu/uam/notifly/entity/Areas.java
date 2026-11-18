@@ -6,30 +6,40 @@ package ni.edu.uam.notifly.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author charly
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "gestion.areas")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "Areas.findAll", query = "SELECT a FROM Areas a"),
-    @javax.persistence.NamedQuery(name = "Areas.findByIdArea", query = "SELECT a FROM Areas a WHERE a.idArea = :idArea"),
-    @javax.persistence.NamedQuery(name = "Areas.findByNombreArea", query = "SELECT a FROM Areas a WHERE a.nombreArea = :nombreArea")})
+@Entity
+@Table(name = "gestion.areas")
+@NamedQueries({
+    @NamedQuery(name = "Areas.findAll", query = "SELECT a FROM Areas a"),
+    @NamedQuery(name = "Areas.findByIdArea", query = "SELECT a FROM Areas a WHERE a.idArea = :idArea"),
+    @NamedQuery(name = "Areas.findByNombreArea", query = "SELECT a FROM Areas a WHERE a.nombreArea = :nombreArea")})
 public class Areas implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "id_area")
+    @Id
+    @Basic(optional = false)
+    @Column(name = "id_area")
     private Integer idArea;
-    @javax.persistence.Column(name = "nombre_area")
+    @Column(name = "nombre_area")
     private String nombreArea;
-    @javax.persistence.OneToMany(mappedBy = "idArea")
+    @OneToMany(mappedBy = "idArea")
     private List<Notas> notasList;
-    @javax.persistence.JoinColumn(name = "id_contacto", referencedColumnName = "id_contacto")
-    @javax.persistence.ManyToOne
+    @JoinColumn(name = "id_contacto", referencedColumnName = "id_contacto")
+    @ManyToOne
     private Contactos idContacto;
 
     public Areas() {
@@ -93,7 +103,7 @@ public class Areas implements Serializable {
 
     @Override
     public String toString() {
-        return "ni.edu.uam.notifly.model.Areas[ idArea=" + idArea + " ]";
+        return "ni.edu.uam.notifly.entity.Areas[ idArea=" + idArea + " ]";
     }
     
 }

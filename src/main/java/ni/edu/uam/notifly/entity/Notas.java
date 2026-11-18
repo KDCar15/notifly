@@ -6,54 +6,67 @@ package ni.edu.uam.notifly.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
  * @author charly
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "gestion.notas")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "Notas.findAll", query = "SELECT n FROM Notas n"),
-    @javax.persistence.NamedQuery(name = "Notas.findByIdNota", query = "SELECT n FROM Notas n WHERE n.idNota = :idNota"),
-    @javax.persistence.NamedQuery(name = "Notas.findByNombres", query = "SELECT n FROM Notas n WHERE n.nombres = :nombres"),
-    @javax.persistence.NamedQuery(name = "Notas.findByApellidos", query = "SELECT n FROM Notas n WHERE n.apellidos = :apellidos"),
-    @javax.persistence.NamedQuery(name = "Notas.findByCorreo", query = "SELECT n FROM Notas n WHERE n.correo = :correo"),
-    @javax.persistence.NamedQuery(name = "Notas.findByCelular", query = "SELECT n FROM Notas n WHERE n.celular = :celular"),
-    @javax.persistence.NamedQuery(name = "Notas.findByFechahora", query = "SELECT n FROM Notas n WHERE n.fechahora = :fechahora"),
-    @javax.persistence.NamedQuery(name = "Notas.findByDescripcion", query = "SELECT n FROM Notas n WHERE n.descripcion = :descripcion")})
+@Entity
+@Table(name = "gestion.notas")
+@NamedQueries({
+    @NamedQuery(name = "Notas.findAll", query = "SELECT n FROM Notas n"),
+    @NamedQuery(name = "Notas.findByIdNota", query = "SELECT n FROM Notas n WHERE n.idNota = :idNota"),
+    @NamedQuery(name = "Notas.findByApellidos", query = "SELECT n FROM Notas n WHERE n.apellidos = :apellidos"),
+    @NamedQuery(name = "Notas.findByCelular", query = "SELECT n FROM Notas n WHERE n.celular = :celular"),
+    @NamedQuery(name = "Notas.findByCorreo", query = "SELECT n FROM Notas n WHERE n.correo = :correo"),
+    @NamedQuery(name = "Notas.findByDescripcion", query = "SELECT n FROM Notas n WHERE n.descripcion = :descripcion"),
+    @NamedQuery(name = "Notas.findByFechahora", query = "SELECT n FROM Notas n WHERE n.fechahora = :fechahora"),
+    @NamedQuery(name = "Notas.findByNombres", query = "SELECT n FROM Notas n WHERE n.nombres = :nombres")})
 public class Notas implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "id_nota")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_nota")
     private Integer idNota;
-    @javax.persistence.Column(name = "nombres")
-    private String nombres;
-    @javax.persistence.Column(name = "apellidos")
+    @Column(name = "apellidos")
     private String apellidos;
-    @javax.persistence.Column(name = "correo")
-    private String correo;
-    @javax.persistence.Column(name = "celular")
+    @Column(name = "celular")
     private String celular;
-    @javax.persistence.Column(name = "fechahora")
-    @javax.persistence.Temporal(javax.persistence.TemporalType.DATE)
-    private Date fechahora;
-    @javax.persistence.Column(name = "descripcion")
+    @Column(name = "correo")
+    private String correo;
+    @Column(name = "descripcion")
     private String descripcion;
-    @javax.persistence.JoinColumn(name = "id_area", referencedColumnName = "id_area")
-    @javax.persistence.ManyToOne
+    @Column(name = "fechahora")
+    @Temporal(TemporalType.DATE)
+    private Date fechahora;
+    @Column(name = "nombres")
+    private String nombres;
+    @JoinColumn(name = "id_area", referencedColumnName = "id_area")
+    @ManyToOne
     private Areas idArea;
-    @javax.persistence.JoinColumn(name = "id_clasificacion", referencedColumnName = "id_clasificacion")
-    @javax.persistence.ManyToOne
+    @JoinColumn(name = "id_clasificacion", referencedColumnName = "id_clasificacion")
+    @ManyToOne
     private Clasificaciones idClasificacion;
-    @javax.persistence.JoinColumn(name = "id_estadonota", referencedColumnName = "id_estadonota")
-    @javax.persistence.ManyToOne
+    @JoinColumn(name = "id_estadonota", referencedColumnName = "id_estadonota")
+    @ManyToOne
     private EstadosNota idEstadonota;
-    @javax.persistence.JoinColumn(name = "id_tiponota", referencedColumnName = "id_tiponota")
-    @javax.persistence.ManyToOne
+    @JoinColumn(name = "id_tiponota", referencedColumnName = "id_tiponota")
+    @ManyToOne
     private TiposNota idTiponota;
 
     public Notas() {
@@ -71,28 +84,12 @@ public class Notas implements Serializable {
         this.idNota = idNota;
     }
 
-    public String getNombres() {
-        return nombres;
-    }
-
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
-
     public String getApellidos() {
         return apellidos;
     }
 
     public void setApellidos(String apellidos) {
         this.apellidos = apellidos;
-    }
-
-    public String getCorreo() {
-        return correo;
-    }
-
-    public void setCorreo(String correo) {
-        this.correo = correo;
     }
 
     public String getCelular() {
@@ -103,12 +100,12 @@ public class Notas implements Serializable {
         this.celular = celular;
     }
 
-    public Date getFechahora() {
-        return fechahora;
+    public String getCorreo() {
+        return correo;
     }
 
-    public void setFechahora(Date fechahora) {
-        this.fechahora = fechahora;
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getDescripcion() {
@@ -117,6 +114,22 @@ public class Notas implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public Date getFechahora() {
+        return fechahora;
+    }
+
+    public void setFechahora(Date fechahora) {
+        this.fechahora = fechahora;
+    }
+
+    public String getNombres() {
+        return nombres;
+    }
+
+    public void setNombres(String nombres) {
+        this.nombres = nombres;
     }
 
     public Areas getIdArea() {
@@ -173,7 +186,7 @@ public class Notas implements Serializable {
 
     @Override
     public String toString() {
-        return "ni.edu.uam.notifly.model.Notas[ idNota=" + idNota + " ]";
+        return "ni.edu.uam.notifly.entity.Notas[ idNota=" + idNota + " ]";
     }
     
 }

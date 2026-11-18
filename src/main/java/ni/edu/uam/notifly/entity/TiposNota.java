@@ -6,29 +6,39 @@ package ni.edu.uam.notifly.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
 
 /**
  *
  * @author charly
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "gestion.tipos_nota")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "TiposNota.findAll", query = "SELECT t FROM TiposNota t"),
-    @javax.persistence.NamedQuery(name = "TiposNota.findByIdTiponota", query = "SELECT t FROM TiposNota t WHERE t.idTiponota = :idTiponota"),
-    @javax.persistence.NamedQuery(name = "TiposNota.findByNombreTipo", query = "SELECT t FROM TiposNota t WHERE t.nombreTipo = :nombreTipo")})
+@Entity
+@Table(name = "gestion.tipos_nota"
+@NamedQueries({
+    @NamedQuery(name = "TiposNota.findAll", query = "SELECT t FROM TiposNota t"),
+    @NamedQuery(name = "TiposNota.findByIdTiponota", query = "SELECT t FROM TiposNota t WHERE t.idTiponota = :idTiponota"),
+    @NamedQuery(name = "TiposNota.findByNombreTipo", query = "SELECT t FROM TiposNota t WHERE t.nombreTipo = :nombreTipo")})
 public class TiposNota implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "id_tiponota")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_tiponota")
     private Integer idTiponota;
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "nombre_tipo")
+    @Column(name = "nombre_tipo")
     private String nombreTipo;
-    @javax.persistence.OneToMany(mappedBy = "idTiponota")
+    @OneToMany(mappedBy = "idTiponota")
     private List<Notas> notasList;
 
     public TiposNota() {
@@ -36,11 +46,6 @@ public class TiposNota implements Serializable {
 
     public TiposNota(Integer idTiponota) {
         this.idTiponota = idTiponota;
-    }
-
-    public TiposNota(Integer idTiponota, String nombreTipo) {
-        this.idTiponota = idTiponota;
-        this.nombreTipo = nombreTipo;
     }
 
     public Integer getIdTiponota() {
@@ -89,7 +94,7 @@ public class TiposNota implements Serializable {
 
     @Override
     public String toString() {
-        return "ni.edu.uam.notifly.model.TiposNota[ idTiponota=" + idTiponota + " ]";
+        return "ni.edu.uam.notifly.entity.TiposNota[ idTiponota=" + idTiponota + " ]";
     }
     
 }

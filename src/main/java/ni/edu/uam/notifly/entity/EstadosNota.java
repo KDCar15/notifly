@@ -6,29 +6,38 @@ package ni.edu.uam.notifly.entity;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 /**
  *
  * @author charly
  */
-@javax.persistence.Entity
-@javax.persistence.Table(name = "gestion.estados_nota")
-@javax.persistence.NamedQueries({
-    @javax.persistence.NamedQuery(name = "EstadosNota.findAll", query = "SELECT e FROM EstadosNota e"),
-    @javax.persistence.NamedQuery(name = "EstadosNota.findByIdEstadonota", query = "SELECT e FROM EstadosNota e WHERE e.idEstadonota = :idEstadonota"),
-    @javax.persistence.NamedQuery(name = "EstadosNota.findByNombreEstado", query = "SELECT e FROM EstadosNota e WHERE e.nombreEstado = :nombreEstado")})
+@Entity
+@Table(name = "gestion.estados_nota")
+@NamedQueries({
+    @NamedQuery(name = "EstadosNota.findAll", query = "SELECT e FROM EstadosNota e"),
+    @NamedQuery(name = "EstadosNota.findByIdEstadonota", query = "SELECT e FROM EstadosNota e WHERE e.idEstadonota = :idEstadonota"),
+    @NamedQuery(name = "EstadosNota.findByNombreEstado", query = "SELECT e FROM EstadosNota e WHERE e.nombreEstado = :nombreEstado")})
 public class EstadosNota implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    @javax.persistence.Id
-    @javax.persistence.GeneratedValue(strategy = javax.persistence.GenerationType.IDENTITY)
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "id_estadonota")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_estadonota")
     private Integer idEstadonota;
-    @javax.persistence.Basic(optional = false)
-    @javax.persistence.Column(name = "nombre_estado")
+    @Column(name = "nombre_estado")
     private String nombreEstado;
-    @javax.persistence.OneToMany(mappedBy = "idEstadonota")
+    @OneToMany(mappedBy = "idEstadonota")
     private List<Notas> notasList;
 
     public EstadosNota() {
@@ -36,11 +45,6 @@ public class EstadosNota implements Serializable {
 
     public EstadosNota(Integer idEstadonota) {
         this.idEstadonota = idEstadonota;
-    }
-
-    public EstadosNota(Integer idEstadonota, String nombreEstado) {
-        this.idEstadonota = idEstadonota;
-        this.nombreEstado = nombreEstado;
     }
 
     public Integer getIdEstadonota() {
@@ -89,7 +93,7 @@ public class EstadosNota implements Serializable {
 
     @Override
     public String toString() {
-        return "ni.edu.uam.notifly.model.EstadosNota[ idEstadonota=" + idEstadonota + " ]";
+        return "ni.edu.uam.notifly.entity.EstadosNota[ idEstadonota=" + idEstadonota + " ]";
     }
     
 }

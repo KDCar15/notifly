@@ -16,7 +16,7 @@
          <children>
             <Label text="Buscar" />
             <TextField fx:id="tf_busqueda" prefHeight="24.0" prefWidth="300.0" />
-            <Button mnemonicParsing="false" onAction="#buscar_plantilla" text="Buscar" />
+            <Button mnemonicParsing="false" onAction="#buscar" text="Buscar" />
             <Button mnemonicParsing="false" onAction="#borrar_busqueda" text="Borrar" />
          </children>
          <VBox.margin>
@@ -30,14 +30,14 @@
       </Label>
       <TableView fx:id="tv_plantillas" prefHeight="360.0" prefWidth="443.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Plantilla" />
+          <TableColumn fx:id="tc_plantilla" prefWidth="181.0" text="Plantilla" />
         </columns>
       </TableView>
       <HBox alignment="TOP_RIGHT" prefHeight="0.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#crear_plantilla" text="Nueva plantilla" />
-            <Button mnemonicParsing="false" onAction="#editar_plantilla" text="Editar" />
-            <Button mnemonicParsing="false" onAction="#borrar_plantilla" text="Eliminar" />
+            <Button mnemonicParsing="false" onAction="#crear" text="Nueva plantilla" />
+            <Button mnemonicParsing="false" onAction="#editar" text="Editar" />
+            <Button mnemonicParsing="false" onAction="#borrar" text="Eliminar" />
          </children>
       </HBox>
    </children>

@@ -33,7 +33,7 @@
         </rowConstraints>
          <children>
             <Label text="Tipo" />
-            <ComboBox fx:id="cb_tipo" onAction="#cb_tipo" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="cb_tipo" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="1" />
             <ComboBox fx:id="cb_categoria" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="3" />
             <Label text="Categoría" GridPane.columnIndex="2" />
             <Label text="Desde la fecha" GridPane.rowIndex="1" />

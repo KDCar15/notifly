@@ -53,7 +53,7 @@
                   <Button mnemonicParsing="false" onAction="#mostrar_notas" prefHeight="24.0" prefWidth="200.0" text="Notas" />
                   <Button mnemonicParsing="false" onAction="#mostrar_plantillas" prefHeight="24.0" prefWidth="200.0" text="Plantillas" GridPane.columnIndex="1" />
                   <Button mnemonicParsing="false" onAction="#mostrar_historial" prefHeight="24.0" prefWidth="200.0" text="Historial" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#salir" prefHeight="24.0" prefWidth="200.0" text="Salir" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_contactos" prefHeight="24.0" prefWidth="200.0" text="Contactos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
             </GridPane>
          </children>
