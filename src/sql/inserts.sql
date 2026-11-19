@@ -17,7 +17,7 @@ INSERT INTO gestion.areas(nombre_area, es_facultad) VALUES
 INSERT INTO gestion.clasificaciones(nombre_clasificacion) VALUES
 ('Limpieza')
 ,('Aulas')
-,('Servicios')
+,('Servicios');
 
 -- Clases atributivas
 INSERT INTO gestion.tipos_nota (nombre_tipo) VALUES
@@ -33,7 +33,7 @@ INSERT INTO gestion.clasificaciones (nombre_clasificacion) VALUES
 
 -- Auditoria
 INSERT INTO auditoria.accion (nombre_accion) VALUES
-('Crear'), ('Editar'), ('Eliminar')
+('Crear'), ('Editar'), ('Eliminar');
 
 SELECT * FROM gestion.areas;
 SELECT * FROM gestion.tipos_nota;

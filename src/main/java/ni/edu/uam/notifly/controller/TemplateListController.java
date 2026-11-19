@@ -1,42 +1,37 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ni.edu.uam.notifly.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 
-/**
- *
- * @author charly
- */
 public class TemplateListController {
+
     @FXML
     private TextField tf_busqueda;
     @FXML
-    private TableView tv_plantillas;
-    
-    
+    private TableView<Object> tv_plantillas;
     @FXML
-    public void buscar_plantilla(){
-        
+    private TableColumn<Object, String> tc_plantilla;
+
+    @FXML
+    public void buscar(ActionEvent event) {
     }
+
     @FXML
-    public void borrar_busqueda(){
-        
+    public void borrar_busqueda(ActionEvent event) {
     }
+
     @FXML
-    public void crear_plantilla(){
-        
+    public void crear(ActionEvent event) {
     }
+
     @FXML
-    public void editar_plantilla(){
-        
+    public void editar(ActionEvent event) {
     }
+
     @FXML
-    public void borrar_plantilla(){
-        
+    public void borrar(ActionEvent event) {
     }
 }

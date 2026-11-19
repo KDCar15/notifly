@@ -1,25 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ni.edu.uam.notifly.controller;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
-/**
- *
- * @author charly
- */
 public class NoteDetailsController {
-    // Campos
+
     @FXML
     private TextField tf_nombresapellidos;
     @FXML
-    private ComboBox cb_facultad;
+    private ComboBox<String> cb_facultad;
     @FXML
     private TextField tf_correo;
     @FXML
@@ -27,33 +22,35 @@ public class NoteDetailsController {
     @FXML
     private TextField tf_fechahora;
     @FXML
-    private ComboBox cb_area;
+    private ComboBox<String> cb_area;
     @FXML
     private TextArea ta_descripcion;
     @FXML
     private TextArea ta_observaciones;
-    
-    // Checkboxs
+
     @FXML
     private CheckBox checkb1;
     @FXML
     private CheckBox checkb2;
     @FXML
-    private CheckBox checkb3;
+    private Label fecha_mandar;
     @FXML
-    private CheckBox checkb4;
-    
-    // Botones
+    private Label fecha_recibir;
+
     @FXML
-    public void marcar_completado(){
-    
+    private Button ver_contactos;
+    @FXML
+    private Button ver_plantillas;
+
+    @FXML
+    public void marcar_completado(ActionEvent event) {
     }
+
     @FXML
-    public void guardar(){
-    
+    public void guardar(ActionEvent event) {
     }
+
     @FXML
-    public void cancelar(){
-    
+    public void cancelar(ActionEvent event) {
     }
 }
