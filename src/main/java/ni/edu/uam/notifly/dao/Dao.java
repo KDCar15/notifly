@@ -7,6 +7,12 @@ package ni.edu.uam.notifly.dao;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.persistence.TypedQuery;
+import ni.edu.uam.notifly.entity.Notas;
 
 /**
  *
@@ -95,5 +101,79 @@ public class Dao implements IDao{
             em.close();
         }
         return null;
+    }
+    
+    
+    public List<Notas> getNotasFiltradas(
+            String tipo,
+            String categoria,
+            LocalDate fechaDesde,
+            LocalDate fechaHasta) {
+
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+
+        try {
+            StringBuilder jpql = new StringBuilder(
+                "SELECT DISTINCT n " +
+                "FROM Notas n " +
+                "JOIN FETCH n.idTiponota " +
+                "JOIN FETCH n.idClasificacion " +
+                "JOIN FETCH n.idEstadonota " +
+                "LEFT JOIN FETCH n.idArea " +
+                "WHERE 1 = 1 ");
+
+            if (tipo != null && !tipo.equals("Todos los tipos")) {
+                jpql.append(" AND n.idTiponota.nombreTipo = :tipo");
+            }
+
+            if (categoria != null && !categoria.equals("Todas las categorías")) {
+                jpql.append(" AND n.idClasificacion.nombreClasificacion = :categoria");
+            }
+
+            if (fechaDesde != null) {
+                jpql.append(" AND n.fechahora >= :fechaDesde");
+            }
+
+            if (fechaHasta != null) {
+                jpql.append(" AND n.fechahora < :fechaHasta");
+            }
+
+            jpql.append(" ORDER BY n.fechahora DESC");
+
+            TypedQuery<Notas> query = em.createQuery(jpql.toString(), Notas.class);
+
+            if (tipo != null && !tipo.equals("Todos los tipos")) {
+                query.setParameter("tipo", tipo);
+            }
+
+            if (categoria != null && !categoria.equals("Todas las categorías")) {
+                query.setParameter("categoria", categoria);
+            }
+
+            ZoneId zona = ZoneId.systemDefault();
+
+            if (fechaDesde != null) {
+                Date desde = Date.from(
+                    fechaDesde.atStartOfDay(zona).toInstant()
+                );
+                query.setParameter("fechaDesde", desde);
+            }
+
+            if (fechaHasta != null) {
+                Date hastaExclusiva = Date.from(
+                    fechaHasta.plusDays(1).atStartOfDay(zona).toInstant()
+                );
+                query.setParameter("fechaHasta", hastaExclusiva);
+            }
+
+            return query.getResultList();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return List.of();
+
+        } finally {
+            em.close();
+        }
     }
 }
