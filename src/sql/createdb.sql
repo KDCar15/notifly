@@ -102,6 +102,11 @@ CREATE TABLE gestion.notas(
         DEFAULT CURRENT_TIMESTAMP
     ,descripcion VARCHAR
         NOT NULL
+    ,completado BOOLEAN
+        NOT NULL
+        DEFAULT false
+    ,notas_adicionales VARCHAR
+        NULL
 
     ,CONSTRAINT PK_nota
         PRIMARY KEY(id_nota)

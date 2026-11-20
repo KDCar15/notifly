@@ -38,8 +38,8 @@
             <ComboBox fx:id="cb_categoria" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="3" />
             <Label text="Categoría" GridPane.columnIndex="2" />
             <Label text="Desde la fecha" GridPane.rowIndex="1" />
-            <DatePicker prefWidth="300.0" promptText="Fecha inicial" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <DatePicker prefWidth="300.0" promptText="Fecha final" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dp_fecha_inicio" prefWidth="300.0" promptText="Fecha inicial" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dp_fecha_fin" prefWidth="300.0" promptText="Fecha final" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label text="Hasta la fecha" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>

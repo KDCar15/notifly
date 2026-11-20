@@ -1,6 +1,7 @@
 package ni.edu.uam.notifly.controller;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -13,11 +14,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import ni.edu.uam.notifly.entity.Notas;
 import ni.edu.uam.notifly.dao.Dao;
+import ni.edu.uam.notifly.entity.Areas;
 
 
 public class NoteDetailsController implements Initializable{
@@ -41,7 +44,7 @@ public class NoteDetailsController implements Initializable{
     @FXML
     private ComboBox<String> cb_tipo;
     @FXML
-    private ComboBox<String> cb_area;
+    private ComboBox<Areas> cb_area;
     @FXML
     private ComboBox<String> cb_categoria;
     @FXML
@@ -75,13 +78,7 @@ public class NoteDetailsController implements Initializable{
         alerta.showAndWait();
     }
     
-    @FXML
-    public void marcar_completado(ActionEvent event) {
-    }
-
-    @FXML
-    public void guardar(ActionEvent event) {
-
+    private void guardar_nota(){
         if (notaActual == null) {
             mostrarAlerta(
                 Alert.AlertType.ERROR,
@@ -92,6 +89,11 @@ public class NoteDetailsController implements Initializable{
         }
 
         try {
+            // Área seleccionada
+            notaActual.setIdArea(
+                    cb_area.getValue()
+            );
+            
             notaActual.setNombresapellidos(
                 tf_nombresapellidos.getText()
             );
@@ -106,6 +108,11 @@ public class NoteDetailsController implements Initializable{
 
             notaActual.setDescripcion(
                 ta_descripcion.getText()
+            );
+            
+            // Observaciones adicionales
+            notaActual.setNotasAdicionales(
+                ta_observaciones.getText()
             );
 
             Notas resultado = dao.update(notaActual);
@@ -137,6 +144,11 @@ public class NoteDetailsController implements Initializable{
         }
     }
     
+    @FXML
+    public void guardar(ActionEvent event) {
+        guardar_nota();
+    }
+    
     private void cerrarVentana() {
         Stage stage = (Stage) tf_nombresapellidos
                 .getScene()
@@ -144,12 +156,71 @@ public class NoteDetailsController implements Initializable{
 
         stage.close();
     }
+    
+    @FXML
+    public void marcar_completado(ActionEvent event) {
+        if (notaActual == null) {
+            mostrarAlerta(
+                Alert.AlertType.ERROR,
+                "Error",
+                "No hay una nota cargada."
+            );
+            return;
+        }
+        notaActual.setCompletado(true);
+        this.guardar_nota();
+    }
 
     @FXML
     public void cancelar(ActionEvent event) {
         cerrarVentana();
     }
     
+    private void cargarAreas() {
+        try {
+            List<Areas> areas = dao.getAll(
+                "Areas.findAll",
+                Areas.class
+            );
+
+            cb_area.getItems().setAll(areas);
+
+            // Mostrar el nombre del área en el ComboBox
+            cb_area.setCellFactory(param -> new ListCell<Areas>() {
+                @Override
+                protected void updateItem(Areas area, boolean empty) {
+                    super.updateItem(area, empty);
+
+                    if (empty || area == null) {
+                        setText(null);
+                    } else {
+                        setText(area.getNombreArea());
+                    }
+                }
+            });
+
+            cb_area.setButtonCell(new ListCell<Areas>() {
+                @Override
+                protected void updateItem(Areas area, boolean empty) {
+                    super.updateItem(area, empty);
+
+                    if (empty || area == null) {
+                        setText(null);
+                    } else {
+                        setText(area.getNombreArea());
+                    }
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta(
+                Alert.AlertType.ERROR,
+                "Error",
+                "No se pudieron cargar las áreas."
+            );
+        }
+    }
     
     public void setNota(Notas nota) {
         this.notaActual = nota;
@@ -188,11 +259,24 @@ public class NoteDetailsController implements Initializable{
         }
 
         // Área involucrada
+        // Seleccionar el área correspondiente
         if (nota.getIdArea() != null) {
-            cb_area.setValue(
-                nota.getIdArea().getNombreArea()
-            );
+            cb_area.getItems().stream()
+                .filter(area -> area.getIdArea().equals(
+                    nota.getIdArea().getIdArea()
+                ))
+                .findFirst()
+                .ifPresent(area -> cb_area.setValue(area));
+        } else {
+            cb_area.setValue(null);
         }
+
+        // Cargar observaciones adicionales
+        ta_observaciones.setText(
+            nota.getNotasAdicionales() != null
+                ? nota.getNotasAdicionales()
+                : ""
+        );
 
         // Tipo
         if (nota.getIdTiponota() != null) {
@@ -315,5 +399,7 @@ public class NoteDetailsController implements Initializable{
                 }
             }
         );
+        
+        cargarAreas();
     }
 }

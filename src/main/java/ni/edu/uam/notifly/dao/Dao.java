@@ -120,7 +120,7 @@ public class Dao implements IDao{
                 "JOIN FETCH n.idClasificacion " +
                 "JOIN FETCH n.idEstadonota " +
                 "LEFT JOIN FETCH n.idArea " +
-                "WHERE 1 = 1 ");
+                "WHERE n.completado = false ");
 
             if (tipo != null && !tipo.equals("Todos los tipos")) {
                 jpql.append(" AND n.idTiponota.nombreTipo = :tipo");

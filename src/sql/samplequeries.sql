@@ -14,6 +14,7 @@ SELECT  en.nombre_estado AS "Estado"
         ,n.celular AS "Telefono"
         ,n.fechahora AS "Fecha y hora"
         ,n.descripcion AS "Descripcion"
+        ,n.completado
 FROM gestion.notas n 
 INNER JOIN gestion.estados_nota en
     ON en.id_estadonota = n.id_estadonota
