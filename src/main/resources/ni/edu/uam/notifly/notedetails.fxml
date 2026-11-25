@@ -38,7 +38,7 @@
                      </rowConstraints>
                      <children>
                         <Label text="Nombres y Apellidos" />
-                        <Label text="Facultad" GridPane.rowIndex="1" />
+                        <Label fx:id="lbl_facultad" text="Facultad" GridPane.rowIndex="1" />
                         <Label text="Correo" GridPane.rowIndex="2" />
                         <Label text="Celular" GridPane.rowIndex="3" />
                         <TextField fx:id="tf_nombresapellidos" editable="false" focusTraversable="false" promptText="Nombre1 Apellido1" GridPane.columnIndex="1" />
@@ -67,8 +67,8 @@
                      <children>
                         <Label text="Categoría" GridPane.rowIndex="2" />
                         <Label text="Fecha y hora" GridPane.rowIndex="1" />
-                        <Label text="Área involucrada" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="cb_area" prefWidth="300.0" promptText="Seleccione un área" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Label text="Área o facultad" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="cb_area" prefWidth="300.0" promptText="Seleccione un área o facultad" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                         <ComboBox fx:id="cb_categoria" disable="true" focusTraversable="false" prefWidth="300.0" promptText="Categoria" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="tf_fechahora" editable="false" focusTraversable="false" promptText="15/04/2026 12:00 AM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label alignment="TOP_CENTER" text="Descripción" GridPane.rowIndex="4" />
@@ -135,7 +135,7 @@
       </HBox>
       <HBox alignment="TOP_RIGHT" prefHeight="0.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" onAction="#marcar_completado" text="Marcar como completada" />
+            <Button fx:id="btn_marcar_completado" mnemonicParsing="false" onAction="#marcar_completado" text="Marcar como completada" />
             <Button mnemonicParsing="false" onAction="#guardar" text="Guardar" />
             <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
          </children>
