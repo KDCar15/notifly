@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="reporte_mensual_facultad" pageWidth="595" pageHeight="842"
+              columnWidth="515" leftMargin="40" rightMargin="40" topMargin="35" bottomMargin="35"
+              whenNoDataType="AllSectionsNoDetail" uuid="09cc46b8-6e18-4d15-a15d-901bfbf31d01">
+    <parameter name="PERIODO" class="java.lang.String"/>
+    <parameter name="FACULTAD" class="java.lang.String"/>
+    <parameter name="TOTAL_CASOS" class="java.lang.Long"/>
+    <parameter name="TOTAL_QUEJAS" class="java.lang.Long"/>
+    <parameter name="TOTAL_SUGERENCIAS" class="java.lang.Long"/>
+    <parameter name="LOGO_UAM" class="java.net.URL"/>
+    <field name="tipo" class="java.lang.String"/>
+    <field name="clasificacion" class="java.lang.String"/>
+    <field name="estado" class="java.lang.String"/>
+    <field name="cantidad" class="java.lang.Long"/>
+    <title>
+        <band height="132" splitType="Stretch">
+            <staticText>
+                <reportElement x="76" y="0" width="439" height="18" forecolor="#147B89" uuid="67b00072-30ac-4fbb-bfa2-1ca02c24835c"/>
+                <textElement><font fontName="SansSerif" size="10" isBold="true"/></textElement>
+                <text><![CDATA[UNIVERSIDAD AMERICANA · UAM]]></text>
+            </staticText>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle">
+                <reportElement x="0" y="0" width="64" height="64" uuid="49aefdad-a31c-43b2-b8ec-1c1ca7341358"/>
+                <imageExpression><![CDATA[$P{LOGO_UAM}]]></imageExpression>
+            </image>
+            <staticText>
+                <reportElement x="76" y="20" width="439" height="28" forecolor="#16324F" uuid="67b00072-30ac-4fbb-bfa2-1ca02c24835c"/>
+                <textElement><font fontName="SansSerif" size="18" isBold="true"/></textElement>
+                <text><![CDATA[Informe mensual por facultad]]></text>
+            </staticText>
+            <line><reportElement x="0" y="47" width="515" height="2" forecolor="#147B89" uuid="ea42d52e-5663-4bf1-92cb-4a0f922dbdc4"/></line>
+            <staticText>
+                <reportElement x="0" y="53" width="82" height="18" uuid="97ed6d95-7610-4b75-b96f-d8207ea94737"/>
+                <textElement><font isBold="true"/></textElement><text><![CDATA[Facultad:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="83" y="53" width="432" height="18" uuid="9d246e0a-ec9c-4747-b9e9-144dca27885a"/>
+                <textFieldExpression><![CDATA[$P{FACULTAD}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="73" width="82" height="18" uuid="3d558b1f-a654-4ab3-bab7-0309a2947d3c"/>
+                <textElement><font isBold="true"/></textElement><text><![CDATA[Período:]]></text>
+            </staticText>
+            <textField>
+                <reportElement x="83" y="73" width="432" height="18" uuid="caf72d55-5c1f-4ef4-8b79-b4d66bbf5656"/>
+                <textFieldExpression><![CDATA[$P{PERIODO}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="0" y="96" width="170" height="22" forecolor="#16324F" uuid="cb08fbbe-5fe1-44cb-a56c-79a23b0d0343"/>
+                <textElement><font size="11" isBold="true"/></textElement>
+                <textFieldExpression><![CDATA["Total de casos: " + $P{TOTAL_CASOS}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="175" y="96" width="170" height="22" uuid="3a24e7b2-df6a-4c3b-8e7b-a75b8c6512ab"/>
+                <textElement><font size="10"/></textElement>
+                <textFieldExpression><![CDATA["Quejas: " + $P{TOTAL_QUEJAS}]]></textFieldExpression>
+            </textField>
+            <textField>
+                <reportElement x="345" y="96" width="170" height="22" uuid="fd1a21cb-78d3-4594-8ff6-2a28f582367b"/>
+                <textElement><font size="10"/></textElement>
+                <textFieldExpression><![CDATA["Sugerencias: " + $P{TOTAL_SUGERENCIAS}]]></textFieldExpression>
+            </textField>
+            <staticText>
+                <reportElement x="0" y="119" width="515" height="13" forecolor="#526579" uuid="08e1be4d-3422-4e61-94c7-d53a6375212e"/>
+                <textElement><font size="8"/></textElement><text><![CDATA[Conteo de registros por tipo, clasificación y estado.]]></text>
+            </staticText>
+        </band>
+    </title>
+    <columnHeader>
+        <band height="27">
+            <staticText><reportElement x="0" y="0" width="110" height="27" backcolor="#E8EEF4" mode="Opaque" uuid="8626dbaf-3ad8-45e9-afb3-0b2740a3162c"/><textElement verticalAlignment="Middle"><font isBold="true"/></textElement><text><![CDATA[Tipo]]></text></staticText>
+            <staticText><reportElement x="110" y="0" width="195" height="27" backcolor="#E8EEF4" mode="Opaque" uuid="26212d91-2fa3-432b-b069-caa228603337"/><textElement verticalAlignment="Middle"><font isBold="true"/></textElement><text><![CDATA[Clasificación]]></text></staticText>
+            <staticText><reportElement x="305" y="0" width="140" height="27" backcolor="#E8EEF4" mode="Opaque" uuid="5fc32386-5dad-4e58-8d0a-60bef3f1f77a"/><textElement verticalAlignment="Middle"><font isBold="true"/></textElement><text><![CDATA[Estado]]></text></staticText>
+            <staticText><reportElement x="445" y="0" width="70" height="27" backcolor="#E8EEF4" mode="Opaque" uuid="03a39408-e7f2-4c5e-a1b3-8ca21fd6cc91"/><textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true"/></textElement><text><![CDATA[Casos]]></text></staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="23" splitType="Stretch">
+            <textField isBlankWhenNull="true"><reportElement x="0" y="0" width="110" height="23" uuid="2fd9e824-7d22-4359-87c0-df795aa89fd9"/><textElement verticalAlignment="Middle"/><textFieldExpression><![CDATA[$F{tipo}]]></textFieldExpression></textField>
+            <textField isBlankWhenNull="true"><reportElement x="110" y="0" width="195" height="23" uuid="cce19a56-e2d5-454d-9be2-f8d89b2cb8fd"/><textElement verticalAlignment="Middle"/><textFieldExpression><![CDATA[$F{clasificacion}]]></textFieldExpression></textField>
+            <textField isBlankWhenNull="true"><reportElement x="305" y="0" width="140" height="23" uuid="6917383d-e97f-4f83-8e25-42fd8b0ec245"/><textElement verticalAlignment="Middle"/><textFieldExpression><![CDATA[$F{estado}]]></textFieldExpression></textField>
+            <textField pattern="#,##0"><reportElement x="445" y="0" width="70" height="23" uuid="71a44a0e-3fc0-42bd-96a9-e8297ce31ec2"/><textElement textAlignment="Center" verticalAlignment="Middle"/><textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression></textField>
+            <line><reportElement x="0" y="22" width="515" height="1" forecolor="#D9E0E7" uuid="510a8705-af8d-4dc8-8f22-b39871465795"/></line>
+        </band>
+    </detail>
+    <pageFooter>
+        <band height="20">
+            <staticText><reportElement x="0" y="2" width="420" height="16" forecolor="#526579" uuid="45a45803-58fa-467e-a7bb-bdb7c106eddd"/><textElement><font size="8"/></textElement><text><![CDATA[Notifly · Sistema administrativo de quejas y sugerencias · UAM]]></text></staticText>
+            <textField><reportElement x="440" y="2" width="75" height="16" forecolor="#526579" uuid="c2013f87-e2e9-4c4e-841b-09c7e2199b28"/><textElement textAlignment="Right"><font size="8"/></textElement><textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression></textField>
+        </band>
+    </pageFooter>
+</jasperReport>

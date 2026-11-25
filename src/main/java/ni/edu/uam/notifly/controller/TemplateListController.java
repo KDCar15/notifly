@@ -13,6 +13,7 @@ import javafx.scene.control.TextField;
  * @author charly
  */
 public class TemplateListController {
+    @FXML public void volver() { try { ni.edu.uam.notifly.App.setRoot("mainscreen"); } catch (java.io.IOException e) { throw new IllegalStateException(e); } }
     @FXML
     private TextField tf_busqueda;
     @FXML

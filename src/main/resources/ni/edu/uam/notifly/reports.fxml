@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox spacing="18.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.ReportsController">
+    <padding><Insets top="24.0" right="28.0" bottom="24.0" left="28.0"/></padding>
+    <children>
+        <HBox alignment="CENTER_LEFT" spacing="18.0">
+            <children>
+                <Button mnemonicParsing="false" onAction="#volver" text="← Inicio"/>
+                <Label text="Informes administrativos">
+                    <font><Font name="System Bold" size="20.0"/></font>
+                </Label>
+            </children>
+        </HBox>
+        <Label text="Generá los informes solicitados desde los casos registrados en el sistema. Los archivos se exportan a PDF." wrapText="true"/>
+
+        <VBox spacing="12.0" style="-fx-border-color: #D9E0E7; -fx-border-radius: 6; -fx-background-radius: 6;" >
+            <padding><Insets top="18.0" right="18.0" bottom="18.0" left="18.0"/></padding>
+            <children>
+                <Label text="Informe mensual por facultad"><font><Font name="System Bold" size="15.0"/></font></Label>
+                <Label text="Incluye totales de quejas y sugerencias, y desglose por clasificación y estado." wrapText="true"/>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="Mes"/><ComboBox fx:id="cb_mes" prefWidth="150.0" promptText="Mes"/>
+                        <Label text="Año"/><ComboBox fx:id="cb_anio_mensual" prefWidth="100.0" promptText="Año"/>
+                        <Label text="Facultad"/><ComboBox fx:id="cb_facultad" prefWidth="190.0" promptText="Facultad"/>
+                    </children>
+                </HBox>
+                <Button mnemonicParsing="false" onAction="#generarMensual" text="Generar informe mensual PDF"/>
+            </children>
+        </VBox>
+
+        <VBox spacing="12.0" style="-fx-border-color: #D9E0E7; -fx-border-radius: 6; -fx-background-radius: 6;" >
+            <padding><Insets top="18.0" right="18.0" bottom="18.0" left="18.0"/></padding>
+            <children>
+                <Label text="Informe semestral general"><font><Font name="System Bold" size="15.0"/></font></Label>
+                <Label text="Resume el total de casos, la cantidad mensual, las quejas por clasificación y su distribución por facultad y estado." wrapText="true"/>
+                <HBox spacing="10.0" alignment="CENTER_LEFT">
+                    <children>
+                        <Label text="Semestre"/><ComboBox fx:id="cb_semestre" prefWidth="185.0" promptText="Semestre"/>
+                        <Label text="Año"/><ComboBox fx:id="cb_anio_semestral" prefWidth="100.0" promptText="Año"/>
+                    </children>
+                </HBox>
+                <Button mnemonicParsing="false" onAction="#generarSemestral" text="Generar informe semestral PDF"/>
+            </children>
+        </VBox>
+    </children>
+</VBox>

@@ -10,8 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.ContactDetailsController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.ContactDetailsController">
    <children>
+      <HBox alignment="CENTER_LEFT" spacing="12.0"><children><Button mnemonicParsing="false" onAction="#volver" text="← Inicio"/><Label text="Contactos"><font><Font name="System Bold" size="18.0"/></font></Label></children></HBox>
       <HBox alignment="CENTER_LEFT" spacing="15.0">
          <children>
             <Label text="Buscar" />

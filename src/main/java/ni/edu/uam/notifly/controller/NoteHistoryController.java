@@ -17,6 +17,7 @@ import javafx.scene.control.TableView;
  * @author charly
  */
 public class NoteHistoryController implements Initializable{
+    @FXML public void volver() { try { ni.edu.uam.notifly.App.setRoot("mainscreen"); } catch (java.io.IOException e) { throw new IllegalStateException(e); } }
     @FXML
     private ComboBox cb_tipo;
     @FXML
@@ -70,6 +71,6 @@ public class NoteHistoryController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        // La pantalla de historial está lista para recibir sus filtros y resultados.
     }
 }

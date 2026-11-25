@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="374.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.MainScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="374.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.MainScreenController">
    <children>
       <MenuBar prefWidth="400.0">
         <menus>
@@ -47,6 +47,7 @@
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
@@ -54,6 +55,7 @@
                   <Button mnemonicParsing="false" onAction="#mostrar_plantillas" prefHeight="24.0" prefWidth="200.0" text="Plantillas" GridPane.columnIndex="1" />
                   <Button mnemonicParsing="false" onAction="#mostrar_historial" prefHeight="24.0" prefWidth="200.0" text="Historial" GridPane.rowIndex="1" />
                   <Button mnemonicParsing="false" onAction="#mostrar_contactos" prefHeight="24.0" prefWidth="200.0" text="Contactos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_informes" prefHeight="24.0" prefWidth="200.0" text="Informes" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>

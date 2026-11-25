@@ -14,6 +14,8 @@ import javafx.scene.control.TableView;
  * @author charly
  */
 public class NoteListController {
+    @FXML public void volver() { navegarInicio(); }
+    private void navegarInicio() { try { ni.edu.uam.notifly.App.setRoot("mainscreen"); } catch (java.io.IOException e) { throw new IllegalStateException(e); } }
     // FXML
     @FXML
     private ComboBox cb_tipo;
