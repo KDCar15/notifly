@@ -3,8 +3,10 @@ module ni.edu.uam.notifly {
     requires javafx.fxml;
 
     requires java.sql;
+    requires java.desktop;
     requires java.persistence;
     requires java.instrument;
+    requires jasperreports;
 
     requires org.eclipse.persistence.core;
     requires org.eclipse.persistence.jpa;

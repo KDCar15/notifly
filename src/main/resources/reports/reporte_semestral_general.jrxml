@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="reporte_semestral_general" pageWidth="595" pageHeight="842"
+              columnWidth="515" leftMargin="40" rightMargin="40" topMargin="35" bottomMargin="35"
+              whenNoDataType="AllSectionsNoDetail" uuid="7cf65a0e-a298-4c63-885c-641c3877fb0b">
+    <parameter name="PERIODO" class="java.lang.String"/>
+    <parameter name="TOTAL_CASOS" class="java.lang.Long"/>
+    <parameter name="TOTAL_QUEJAS" class="java.lang.Long"/>
+    <parameter name="TOTAL_SUGERENCIAS" class="java.lang.Long"/>
+    <parameter name="LOGO_UAM" class="java.net.URL"/>
+    <field name="seccion" class="java.lang.String"/>
+    <field name="grupo" class="java.lang.String"/>
+    <field name="detalle" class="java.lang.String"/>
+    <field name="cantidad" class="java.lang.Long"/>
+    <group name="seccionGroup" keepTogether="true">
+        <groupExpression><![CDATA[$F{seccion}]]></groupExpression>
+        <groupHeader><band height="25">
+            <textField><reportElement x="0" y="2" width="515" height="21" forecolor="#16324F" backcolor="#E8EEF4" mode="Opaque" uuid="2f3425d8-ef65-475e-a5fc-900d5f74ade4"/><textElement verticalAlignment="Middle"><font size="10" isBold="true"/></textElement><textFieldExpression><![CDATA[$F{seccion}]]></textFieldExpression></textField>
+        </band></groupHeader>
+    </group>
+    <title>
+        <band height="120" splitType="Stretch">
+            <staticText><reportElement x="76" y="0" width="439" height="18" forecolor="#147B89" uuid="a929f747-fbf7-4360-90a0-4e6a1658a2ce"/><textElement><font fontName="SansSerif" size="10" isBold="true"/></textElement><text><![CDATA[UNIVERSIDAD AMERICANA · UAM]]></text></staticText>
+            <image scaleImage="RetainShape" hAlign="Center" vAlign="Middle"><reportElement x="0" y="0" width="64" height="64" uuid="49aefdad-a31c-43b2-b8ec-1c1ca7341358"/><imageExpression><![CDATA[$P{LOGO_UAM}]]></imageExpression></image>
+            <staticText><reportElement x="76" y="20" width="439" height="28" forecolor="#16324F" uuid="4cf81eb0-a717-4368-aebf-c201bcf4035f"/><textElement><font fontName="SansSerif" size="18" isBold="true"/></textElement><text><![CDATA[Informe semestral general]]></text></staticText>
+            <line><reportElement x="0" y="58" width="515" height="2" forecolor="#147B89" uuid="ea42d52e-5663-4bf1-92cb-4a0f922dbdc4"/></line>
+            <textField><reportElement x="0" y="58" width="515" height="20" uuid="b0da4f5c-1643-4329-afd6-9a9f3f00ef1d"/><textElement><font isBold="true"/></textElement><textFieldExpression><![CDATA[$P{PERIODO}]]></textFieldExpression></textField>
+            <textField><reportElement x="0" y="82" width="170" height="24" forecolor="#16324F" uuid="0a6034db-7192-46bf-bd3f-55c8ec49071b"/><textElement><font size="11" isBold="true"/></textElement><textFieldExpression><![CDATA["Total de casos: " + $P{TOTAL_CASOS}]]></textFieldExpression></textField>
+            <textField><reportElement x="175" y="82" width="170" height="24" uuid="5248416d-e05f-481b-9e06-47af749aa32f"/><textElement/><textFieldExpression><![CDATA["Quejas: " + $P{TOTAL_QUEJAS}]]></textFieldExpression></textField>
+            <textField><reportElement x="345" y="82" width="170" height="24" uuid="d293bd43-609f-47e2-945d-b55e058d241f"/><textElement/><textFieldExpression><![CDATA["Sugerencias: " + $P{TOTAL_SUGERENCIAS}]]></textFieldExpression></textField>
+            <staticText><reportElement x="0" y="106" width="515" height="13" forecolor="#526579" uuid="eb13f376-52b8-4852-b4a7-f0a70f71aeb6"/><textElement><font size="8"/></textElement><text><![CDATA[Resumen para gerencia con desglose por mes, clasificación y facultad.]]></text></staticText>
+        </band>
+    </title>
+    <columnHeader>
+        <band height="26">
+            <staticText><reportElement x="0" y="0" width="205" height="26" backcolor="#E8EEF4" mode="Opaque" uuid="d8124c63-6a2b-4714-89ee-1c6cdcc4c01e"/><textElement verticalAlignment="Middle"><font isBold="true"/></textElement><text><![CDATA[Grupo]]></text></staticText>
+            <staticText><reportElement x="205" y="0" width="240" height="26" backcolor="#E8EEF4" mode="Opaque" uuid="b6c4d9da-8ef2-4d56-a31b-17f14b1d3b53"/><textElement verticalAlignment="Middle"><font isBold="true"/></textElement><text><![CDATA[Detalle]]></text></staticText>
+            <staticText><reportElement x="445" y="0" width="70" height="26" backcolor="#E8EEF4" mode="Opaque" uuid="f47baa08-6e62-40fd-9855-0ec6058a7ae4"/><textElement textAlignment="Center" verticalAlignment="Middle"><font isBold="true"/></textElement><text><![CDATA[Casos]]></text></staticText>
+        </band>
+    </columnHeader>
+    <detail>
+        <band height="22" splitType="Stretch">
+            <textField isBlankWhenNull="true"><reportElement x="0" y="0" width="205" height="22" uuid="bc2e5961-e5dd-4797-8718-885e47f8a6fa"/><textElement verticalAlignment="Middle"/><textFieldExpression><![CDATA[$F{grupo}]]></textFieldExpression></textField>
+            <textField isBlankWhenNull="true"><reportElement x="205" y="0" width="240" height="22" uuid="b5fcd79f-3a9f-4284-8ad4-18bcad8b8956"/><textElement verticalAlignment="Middle"/><textFieldExpression><![CDATA[$F{detalle}]]></textFieldExpression></textField>
+            <textField pattern="#,##0"><reportElement x="445" y="0" width="70" height="22" uuid="53bb3412-7dd1-46ac-83b4-ea00970e01ac"/><textElement textAlignment="Center" verticalAlignment="Middle"/><textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression></textField>
+            <line><reportElement x="0" y="21" width="515" height="1" forecolor="#D9E0E7" uuid="c3730ae0-95ed-4351-9c85-64e15b1db2c3"/></line>
+        </band>
+    </detail>
+    <pageFooter>
+        <band height="20">
+            <staticText><reportElement x="0" y="2" width="420" height="16" forecolor="#526579" uuid="965ac22d-d3ac-4102-ade9-f996e7e39db3"/><textElement><font size="8"/></textElement><text><![CDATA[Notifly · Sistema administrativo de quejas y sugerencias · UAM]]></text></staticText>
+            <textField><reportElement x="440" y="2" width="75" height="16" forecolor="#526579" uuid="8f4c3a3e-e910-4537-8693-f67d534697ee"/><textElement textAlignment="Right"><font size="8"/></textElement><textFieldExpression><![CDATA["Página " + $V{PAGE_NUMBER}]]></textFieldExpression></textField>
+        </band>
+    </pageFooter>
+</jasperReport>
