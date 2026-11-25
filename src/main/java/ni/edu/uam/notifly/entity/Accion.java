@@ -20,7 +20,7 @@ import javax.persistence.Table;
  * @author charly
  */
 @Entity
-@Table(name = "accion", schema = "auditoria")
+@Table(name = "auditoria.accion")
 @NamedQueries({
     @NamedQuery(name = "Accion.findAll", query = "SELECT a FROM Accion a"),
     @NamedQuery(name = "Accion.findByIdAccion", query = "SELECT a FROM Accion a WHERE a.idAccion = :idAccion"),

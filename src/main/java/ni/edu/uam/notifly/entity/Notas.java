@@ -36,7 +36,9 @@ import javax.persistence.TemporalType;
     @NamedQuery(name = "Notas.findByCorreo", query = "SELECT n FROM Notas n WHERE n.correo = :correo"),
     @NamedQuery(name = "Notas.findByCelular", query = "SELECT n FROM Notas n WHERE n.celular = :celular"),
     @NamedQuery(name = "Notas.findByFechahora", query = "SELECT n FROM Notas n WHERE n.fechahora = :fechahora"),
-    @NamedQuery(name = "Notas.findByDescripcion", query = "SELECT n FROM Notas n WHERE n.descripcion = :descripcion")})
+    @NamedQuery(name = "Notas.findByDescripcion", query = "SELECT n FROM Notas n WHERE n.descripcion = :descripcion"),
+    @NamedQuery(name = "Notas.findByCompletado", query = "SELECT n FROM Notas n WHERE n.completado = :completado"),
+    @NamedQuery(name = "Notas.findByNotasAdicionales", query = "SELECT n FROM Notas n WHERE n.notasAdicionales = :notasAdicionales")})
 public class Notas implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,6 +63,11 @@ public class Notas implements Serializable {
     @Basic(optional = false)
     @Column(name = "descripcion")
     private String descripcion;
+    @Basic(optional = false)
+    @Column(name = "completado")
+    private boolean completado;
+    @Column(name = "notas_adicionales")
+    private String notasAdicionales;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "idNota")
     private List<Checklists> checklistsList;
     @JoinColumn(name = "id_area", referencedColumnName = "id_area")
@@ -83,13 +90,14 @@ public class Notas implements Serializable {
         this.idNota = idNota;
     }
 
-    public Notas(Integer idNota, String nombresapellidos, String correo, String celular, Date fechahora, String descripcion) {
+    public Notas(Integer idNota, String nombresapellidos, String correo, String celular, Date fechahora, String descripcion, boolean completado) {
         this.idNota = idNota;
         this.nombresapellidos = nombresapellidos;
         this.correo = correo;
         this.celular = celular;
         this.fechahora = fechahora;
         this.descripcion = descripcion;
+        this.completado = completado;
     }
 
     public Integer getIdNota() {
@@ -138,6 +146,22 @@ public class Notas implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public boolean getCompletado() {
+        return completado;
+    }
+
+    public void setCompletado(boolean completado) {
+        this.completado = completado;
+    }
+
+    public String getNotasAdicionales() {
+        return notasAdicionales;
+    }
+
+    public void setNotasAdicionales(String notasAdicionales) {
+        this.notasAdicionales = notasAdicionales;
     }
 
     public List<Checklists> getChecklistsList() {

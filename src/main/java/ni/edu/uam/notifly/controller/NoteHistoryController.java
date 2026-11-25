@@ -1,76 +1,82 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package ni.edu.uam.notifly.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
-/**
- *
- * @author charly
- */
-public class NoteHistoryController implements Initializable{
-    @FXML public void volver() { try { ni.edu.uam.notifly.App.setRoot("mainscreen"); } catch (java.io.IOException e) { throw new IllegalStateException(e); } }
+public class NoteHistoryController implements Initializable {
+
     @FXML
-    private ComboBox cb_tipo;
-    @FXML
-    private ComboBox cb_estado;
-    @FXML
-    private ComboBox cb_area;
-    @FXML
-    private ComboBox cb_categoria;
-    @FXML
-    private ComboBox cb_facultad;
-    
-    // Tabla
-    @FXML
-    private TableView tv_resultados;
-    @FXML
-    private TableColumn tc_acceso;
-    @FXML
-    private TableColumn tc_id;
-    @FXML
-    private TableColumn tc_tipo;
-    @FXML
-    private TableColumn tc_facultad;
-    @FXML
-    private TableColumn tc_categoria;
-    @FXML
-    private TableColumn tc_area;
-    @FXML
-    private TableColumn tc_estado;
-    
-    // Metodos
-    @FXML
-    public void seleccionar_fecha_inicio(){
-    
+    public void volver() {
+        try {
+            ni.edu.uam.notifly.App.setRoot("mainscreen");
+        } catch (java.io.IOException exception) {
+            javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("No se pudo volver al menú principal.");
+            alert.showAndWait();
+        }
     }
+
     @FXML
-    public void seleccionar_fecha_fin(){
-    
+    private ComboBox<String> cb_tipo;
+    @FXML
+    private ComboBox<String> cb_estado;
+    @FXML
+    private ComboBox<String> cb_area;
+    @FXML
+    private ComboBox<String> cb_categoria;
+    @FXML
+    private ComboBox<String> cb_facultad;
+    @FXML
+    private Button bt_fecha;
+
+    @FXML
+    private TableView<Object> tv_resultados;
+    @FXML
+    private TableColumn<Object, String> tc_acceso;
+    @FXML
+    private TableColumn<Object, Integer> tc_id;
+    @FXML
+    private TableColumn<Object, String> tc_tipo;
+    @FXML
+    private TableColumn<Object, String> tc_facultad;
+    @FXML
+    private TableColumn<Object, String> tc_categoria;
+    @FXML
+    private TableColumn<Object, String> tc_area;
+    @FXML
+    private TableColumn<Object, String> tc_estado;
+
+    @FXML
+    public void seleccionar_fecha_inicio(ActionEvent event) {
     }
+
     @FXML
-    public void buscar(){
-    
+    public void seleccionar_fecha_fin(ActionEvent event) {
     }
+
     @FXML
-    public void limpiar(){
-    
+    public void buscar(ActionEvent event) {
     }
+
     @FXML
-    public void visualizar(){
-    
+    public void limpiar(ActionEvent event) {
+    }
+
+    @FXML
+    public void visualizar(ActionEvent event) {
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // La pantalla de historial está lista para recibir sus filtros y resultados.
+        // Inicialización de la tabla y comboboxes
     }
 }

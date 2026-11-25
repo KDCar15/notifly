@@ -12,6 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.control.DatePicker?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.NoteListController">
    <children>
@@ -38,13 +39,14 @@
             <ComboBox fx:id="cb_categoria" prefHeight="24.0" prefWidth="300.0" GridPane.columnIndex="3" />
             <Label text="Categoría" GridPane.columnIndex="2" />
             <Label text="Desde la fecha" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#seleccionar_fecha_inicio" prefWidth="300.0" text="Seleccionar fecha" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#seleccionar_fecha_fin" prefWidth="300.0" text="Seleccionar fecha" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dp_fecha_inicio" prefWidth="300.0" promptText="Fecha inicial" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dp_fecha_fin" prefWidth="300.0" promptText="Fecha final" GridPane.columnIndex="3" GridPane.rowIndex="1" />
             <Label text="Hasta la fecha" GridPane.columnIndex="2" GridPane.rowIndex="1" />
          </children>
       </GridPane>
       <HBox alignment="TOP_RIGHT" prefHeight="0.0" prefWidth="600.0" spacing="15.0">
          <children>
+            <Button mnemonicParsing="false" text="Ver nota seleccionada" onAction="#ver_nota"/>
             <Button mnemonicParsing="false" onAction="#buscar" text="Buscar" />
             <Button mnemonicParsing="false" onAction="#limpiar" text="Limpiar" />
          </children>

@@ -68,13 +68,13 @@
                         <Label text="Categoría" GridPane.rowIndex="2" />
                         <Label text="Fecha y hora" GridPane.rowIndex="1" />
                         <Label text="Área involucrada" GridPane.rowIndex="3" />
-                        <ComboBox prefWidth="300.0" promptText="Seleccione un área" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                        <ComboBox fx:id="cb_area" disable="true" focusTraversable="false" prefWidth="300.0" promptText="Categoria" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <ComboBox fx:id="cb_area" prefWidth="300.0" promptText="Seleccione un área" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <ComboBox fx:id="cb_categoria" disable="true" focusTraversable="false" prefWidth="300.0" promptText="Categoria" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                         <TextField fx:id="tf_fechahora" editable="false" focusTraversable="false" promptText="15/04/2026 12:00 AM" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <Label alignment="TOP_CENTER" text="Descripción" GridPane.rowIndex="4" />
                         <TextArea fx:id="ta_descripcion" editable="false" focusTraversable="false" prefHeight="100.0" prefWidth="200.0" promptText="Descripción de la nota" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                         <Label text="Tipo" />
-                        <ComboBox disable="true" focusTraversable="false" prefWidth="300.0" promptText="El tipo de nota aparecerá aquí" GridPane.columnIndex="1" />
+                        <ComboBox fx:id="cb_tipo" disable="true" focusTraversable="false" prefWidth="300.0" promptText="El tipo de nota aparecerá aquí" GridPane.columnIndex="1" />
                      </children>
                   </GridPane>
                </children>
@@ -124,8 +124,8 @@
                         <Font name="System Bold" size="13.0" />
                      </font>
                   </Label>
-                  <Button fx:id="ver_contactos" mnemonicParsing="false" prefWidth="300.0" text="Consultar contactos" />
-                  <Button fx:id="ver_plantillas" mnemonicParsing="false" prefHeight="24.0" prefWidth="300.0" text="Consultar plantillas" />
+                  <Button fx:id="ver_contactos" onAction="#ver_contactos" mnemonicParsing="false" prefWidth="300.0" text="Consultar contactos" />
+         <Button fx:id="ver_plantillas" onAction="#ver_plantillas" prefHeight="24.0" prefWidth="300.0" text="Consultar plantillas" />
                </children>
                <padding>
                   <Insets left="15.0" />

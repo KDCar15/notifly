@@ -9,41 +9,102 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<VBox maxHeight="-Infinity"
+      maxWidth="-Infinity"
+      minHeight="-Infinity"
+      minWidth="-Infinity"
+      spacing="15.0"
+      xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ni.edu.uam.notifly.controller.ContactListController">
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.ContactDetailsController">
    <children>
-      <HBox alignment="CENTER_LEFT" spacing="12.0"><children><Button mnemonicParsing="false" onAction="#volver" text="← Inicio"/><Label text="Contactos"><font><Font name="System Bold" size="18.0"/></font></Label></children></HBox>
+
+       <HBox alignment="CENTER_LEFT" spacing="12.0">
+          <children>
+             <Button mnemonicParsing="false" onAction="#volver" text="← Inicio"/>
+             <Label text="Directorio de contactos">
+                <font><Font name="System Bold" size="18.0"/></font>
+             </Label>
+          </children>
+       </HBox>
+
+      <!-- BÚSQUEDA -->
       <HBox alignment="CENTER_LEFT" spacing="15.0">
          <children>
-            <Label text="Buscar" />
-            <TextField fx:id="tf_busqueda" prefHeight="24.0" prefWidth="300.0" />
-            <Button mnemonicParsing="false" onAction="#buscar" text="Buscar" />
-            <Button mnemonicParsing="false" onAction="#borrar_busqueda" text="Borrar" />
+            <Label text="Buscar"/>
+
+            <TextField fx:id="tf_busqueda"
+                       prefHeight="24.0"
+                       prefWidth="300.0"/>
+
+            <Button mnemonicParsing="false"
+                    onAction="#buscar"
+                    text="Buscar"/>
+
+            <Button mnemonicParsing="false"
+                    onAction="#borrar_busqueda"
+                    text="Borrar"/>
          </children>
+
          <VBox.margin>
-            <Insets />
+            <Insets/>
          </VBox.margin>
       </HBox>
+
+      <!-- TÍTULO -->
       <Label text="Contactos disponibles">
          <font>
-            <Font name="System Bold" size="13.0" />
+            <Font name="System Bold" size="13.0"/>
          </font>
       </Label>
-      <TableView fx:id="tv_plantillas" prefHeight="360.0" prefWidth="443.0">
-        <columns>
-          <TableColumn fx:id="tc_nombreapellido" prefWidth="185.0" text="Nombres y apellidos" />
-            <TableColumn fx:id="tc_area" minWidth="0.0" prefWidth="184.0" text="Área" />
-        </columns>
+
+      <!-- TABLA DE CONTACTOS -->
+      <TableView fx:id="tv_contactos"
+                 prefHeight="360.0"
+                 prefWidth="443.0">
+
+         <columns>
+            <TableColumn fx:id="tc_nombreapellido"
+                         prefWidth="185.0"
+                         text="Nombres y apellidos"/>
+
+            <TableColumn fx:id="tc_area"
+                         minWidth="0.0"
+                         prefWidth="184.0"
+                         text="Área"/>
+         </columns>
+
       </TableView>
-      <HBox alignment="TOP_RIGHT" prefHeight="0.0" spacing="15.0">
+
+      <!-- BOTONES DE ACCIONES -->
+      <HBox alignment="TOP_RIGHT"
+            prefHeight="0.0"
+            spacing="15.0">
+
          <children>
-            <Button mnemonicParsing="false" onAction="#crear" text="Nuevo contacto" />
-            <Button mnemonicParsing="false" onAction="#editar" text="Editar" />
-            <Button mnemonicParsing="false" onAction="#eliminar" text="Eliminar" />
+            <Button mnemonicParsing="false"
+                    onAction="#crear"
+                    text="Nuevo contacto"/>
+
+            <Button mnemonicParsing="false"
+                    onAction="#editar"
+                    text="Editar"/>
+
+            <Button mnemonicParsing="false"
+                    onAction="#eliminar"
+                    text="Eliminar"/>
          </children>
+
       </HBox>
+
    </children>
+
    <padding>
-      <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      <Insets bottom="15.0"
+              left="15.0"
+              right="15.0"
+              top="15.0"/>
    </padding>
+
 </VBox>

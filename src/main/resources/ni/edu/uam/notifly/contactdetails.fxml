@@ -37,7 +37,7 @@
             <TextField fx:id="tf_correo" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Label text="Información adicional">
+      <Label text="Ocupación">
          <font>
             <Font name="System Bold" size="13.0" />
          </font>
