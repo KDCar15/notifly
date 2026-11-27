@@ -3,8 +3,10 @@ package ni.edu.uam.notifly.dao;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -14,8 +16,12 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.TypedQuery;
 
 import ni.edu.uam.notifly.entity.Areas;
+import ni.edu.uam.notifly.entity.Clasificaciones;
 import ni.edu.uam.notifly.entity.Contactos;
+import ni.edu.uam.notifly.entity.EstadosNota;
 import ni.edu.uam.notifly.entity.Notas;
+import ni.edu.uam.notifly.entity.TiposNota;
+import ni.edu.uam.notifly.model.PlantillaCorreo;
 
 public class Dao implements IDao {
 
@@ -294,6 +300,218 @@ public class Dao implements IDao {
             e.printStackTrace();
             return List.of();
 
+        } finally {
+            em.close();
+        }
+    }
+
+    /** Creates a case using the existing areas, types, classifications and default state. */
+    public Notas crearNota(String nombres, String correo, String celular,
+            String descripcion, String tipo, String categoria, Integer areaId) {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            TiposNota tipoNota = em.createNamedQuery("TiposNota.findByNombreTipo", TiposNota.class)
+                    .setParameter("nombreTipo", tipo).getSingleResult();
+            Clasificaciones clasificacion = em.createNamedQuery(
+                    "Clasificaciones.findByNombreClasificacion", Clasificaciones.class)
+                    .setParameter("nombreClasificacion", categoria).getSingleResult();
+            EstadosNota estado = em.createQuery(
+                    "SELECT e FROM EstadosNota e WHERE LOWER(e.nombreEstado) IN ('pendiente','en revisión','en revision') ORDER BY e.idEstadonota",
+                    EstadosNota.class).setMaxResults(1).getSingleResult();
+
+            Notas nota = new Notas();
+            nota.setNombresapellidos(nombres.trim());
+            nota.setCorreo(correo.trim());
+            nota.setCelular(celular.trim());
+            nota.setDescripcion(descripcion.trim());
+            nota.setFechahora(new Date());
+            nota.setCompletado(false);
+            nota.setIdTiponota(tipoNota);
+            nota.setIdClasificacion(clasificacion);
+            nota.setIdEstadonota(estado);
+            nota.setIdArea(areaId == null ? null : em.find(Areas.class, areaId));
+            if (areaId != null && nota.getIdArea() == null) {
+                throw new IllegalArgumentException("El área seleccionada ya no existe.");
+            }
+            em.persist(nota);
+            em.flush();
+            transaction.commit();
+            return nota;
+        } catch (Exception exception) {
+            if (transaction.isActive()) transaction.rollback();
+            System.err.println("No se pudo crear la nota:");
+            exception.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    /** Records the latest access, using the existing upsert semantics of the history table. */
+    public boolean registrarAccesoNota(int idNota) {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            em.createNativeQuery("INSERT INTO auditoria.historial_notas (id_nota) VALUES (?) "
+                    + "ON CONFLICT (id_nota) DO UPDATE SET fecha_acceso = CURRENT_TIMESTAMP")
+                    .setParameter(1, idNota).executeUpdate();
+            transaction.commit();
+            return true;
+        } catch (Exception exception) {
+            if (transaction.isActive()) transaction.rollback();
+            System.err.println("No se pudo actualizar el historial de la nota:");
+            exception.printStackTrace();
+            return false;
+        } finally {
+            em.close();
+        }
+    }
+
+    /** Returns history rows with current case data and the most recent access timestamp. */
+    public List<Object[]> buscarHistorial(String tipo, String estado, String categoria,
+            Integer facultadId, Integer areaId, LocalDate desde, LocalDate hasta) {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        try {
+            StringBuilder sql = new StringBuilder(
+                    "SELECT h.fecha_acceso, n.id_nota, t.nombre_tipo, "
+                    + "CASE WHEN a.es_facultad IS TRUE THEN a.nombre_area ELSE '' END, "
+                    + "c.nombre_clasificacion, "
+                    + "CASE WHEN COALESCE(a.es_facultad,FALSE) IS FALSE THEN COALESCE(a.nombre_area,'') ELSE '' END, "
+                    + "e.nombre_estado "
+                    + "FROM auditoria.historial_notas h "
+                    + "JOIN gestion.notas n ON n.id_nota=h.id_nota "
+                    + "JOIN gestion.tipos_nota t ON t.id_tiponota=n.id_tiponota "
+                    + "JOIN gestion.clasificaciones c ON c.id_clasificacion=n.id_clasificacion "
+                    + "JOIN gestion.estados_nota e ON e.id_estadonota=n.id_estadonota "
+                    + "LEFT JOIN gestion.areas a ON a.id_area=n.id_area WHERE 1=1 ");
+            List<Object> parameters = new ArrayList<>();
+            if (tipo != null && !tipo.isBlank()) { sql.append("AND t.nombre_tipo=? "); parameters.add(tipo); }
+            if (estado != null && !estado.isBlank()) { sql.append("AND e.nombre_estado=? "); parameters.add(estado); }
+            if (categoria != null && !categoria.isBlank()) { sql.append("AND c.nombre_clasificacion=? "); parameters.add(categoria); }
+            if (facultadId != null && areaId != null) {
+                sql.append("AND n.id_area IN (?,?) "); parameters.add(facultadId); parameters.add(areaId);
+            } else if (facultadId != null) { sql.append("AND n.id_area=? AND a.es_facultad IS TRUE "); parameters.add(facultadId); }
+            else if (areaId != null) { sql.append("AND n.id_area=? AND COALESCE(a.es_facultad,FALSE) IS FALSE "); parameters.add(areaId); }
+            if (desde != null) {
+                sql.append("AND h.fecha_acceso>=? ");
+                parameters.add(Timestamp.from(desde.atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            }
+            if (hasta != null) {
+                sql.append("AND h.fecha_acceso<? ");
+                parameters.add(Timestamp.from(hasta.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant()));
+            }
+            sql.append("ORDER BY h.fecha_acceso DESC, n.id_nota DESC");
+            javax.persistence.Query query = em.createNativeQuery(sql.toString());
+            for (int i = 0; i < parameters.size(); i++) query.setParameter(i + 1, parameters.get(i));
+            return query.getResultList();
+        } catch (Exception exception) {
+            System.err.println("No se pudo consultar el historial:");
+            exception.printStackTrace();
+            return List.of();
+        } finally {
+            em.close();
+        }
+    }
+
+    public Notas buscarNotaCompleta(int idNota) {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        try {
+            return em.createQuery("SELECT DISTINCT n FROM Notas n "
+                    + "JOIN FETCH n.idTiponota JOIN FETCH n.idClasificacion "
+                    + "JOIN FETCH n.idEstadonota LEFT JOIN FETCH n.idArea WHERE n.idNota=:id",
+                    Notas.class).setParameter("id", idNota).getSingleResult();
+        } catch (Exception exception) {
+            System.err.println("No se pudo cargar la nota del historial:");
+            exception.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    // =================================================
+    // PLANTILLAS DE CORREO (respuestas.plantillas)
+    // =================================================
+
+    public List<PlantillaCorreo> buscarPlantillas(String filtro) {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        try {
+            String sql = "SELECT id_plantilla,nombre_plantilla,contenido FROM respuestas.plantillas ";
+            boolean filtrar = filtro != null && !filtro.isBlank();
+            if (filtrar) sql += "WHERE LOWER(nombre_plantilla) LIKE ? OR LOWER(contenido) LIKE ? ";
+            sql += "ORDER BY LOWER(nombre_plantilla)";
+            javax.persistence.Query query = em.createNativeQuery(sql);
+            if (filtrar) {
+                String like = "%" + filtro.trim().toLowerCase() + "%";
+                query.setParameter(1, like).setParameter(2, like);
+            }
+            List<PlantillaCorreo> plantillas = new ArrayList<>();
+            for (Object item : query.getResultList()) {
+                Object[] row = (Object[]) item;
+                plantillas.add(new PlantillaCorreo(((Number) row[0]).intValue(),
+                        String.valueOf(row[1]), String.valueOf(row[2])));
+            }
+            return plantillas;
+        } catch (Exception exception) {
+            System.err.println("No se pudieron cargar las plantillas de respuestas:");
+            exception.printStackTrace();
+            return List.of();
+        } finally {
+            em.close();
+        }
+    }
+
+    public PlantillaCorreo guardarPlantilla(PlantillaCorreo plantilla) {
+        if (plantilla == null) return null;
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            if (plantilla.getId() == null) {
+                em.createNativeQuery("INSERT INTO respuestas.plantillas (nombre_plantilla,contenido) VALUES (?,?)")
+                        .setParameter(1, plantilla.getNombre().trim())
+                        .setParameter(2, plantilla.getContenido().trim()).executeUpdate();
+                Number id = (Number) em.createNativeQuery(
+                        "SELECT currval(pg_get_serial_sequence('respuestas.plantillas','id_plantilla'))")
+                        .getSingleResult();
+                plantilla.setId(id.intValue());
+            } else {
+                int actualizadas = em.createNativeQuery("UPDATE respuestas.plantillas "
+                        + "SET nombre_plantilla=?, contenido=? WHERE id_plantilla=?")
+                        .setParameter(1, plantilla.getNombre().trim())
+                        .setParameter(2, plantilla.getContenido().trim())
+                        .setParameter(3, plantilla.getId()).executeUpdate();
+                if (actualizadas == 0) throw new IllegalArgumentException("La plantilla ya no existe.");
+            }
+            transaction.commit();
+            return plantilla;
+        } catch (Exception exception) {
+            if (transaction.isActive()) transaction.rollback();
+            System.err.println("No se pudo guardar la plantilla:");
+            exception.printStackTrace();
+            return null;
+        } finally {
+            em.close();
+        }
+    }
+
+    public boolean eliminarPlantilla(int id) {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        EntityTransaction transaction = em.getTransaction();
+        try {
+            transaction.begin();
+            int eliminadas = em.createNativeQuery("DELETE FROM respuestas.plantillas WHERE id_plantilla=?")
+                    .setParameter(1, id).executeUpdate();
+            transaction.commit();
+            return eliminadas > 0;
+        } catch (Exception exception) {
+            if (transaction.isActive()) transaction.rollback();
+            System.err.println("No se pudo eliminar la plantilla:");
+            exception.printStackTrace();
+            return false;
         } finally {
             em.close();
         }

@@ -21,11 +21,16 @@ import javafx.stage.Stage;
 import ni.edu.uam.notifly.entity.Notas;
 import ni.edu.uam.notifly.dao.Dao;
 import ni.edu.uam.notifly.entity.Areas;
+import ni.edu.uam.notifly.entity.TiposNota;
+import ni.edu.uam.notifly.entity.Clasificaciones;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 
 public class NoteDetailsController implements Initializable{
 
     private Notas notaActual;
+    private boolean modoCreacion;
 
     private Stage ventanaContactos;
     private Stage ventanaPlantillas;
@@ -35,6 +40,8 @@ public class NoteDetailsController implements Initializable{
     private TextField tf_nombresapellidos;
     @FXML
     private ComboBox<String> cb_facultad;
+    @FXML
+    private Label lbl_facultad;
     @FXML
     private TextField tf_correo;
     @FXML
@@ -65,6 +72,8 @@ public class NoteDetailsController implements Initializable{
     private Button ver_contactos;
     @FXML
     private Button ver_plantillas;
+    @FXML
+    private Button btn_marcar_completado;
 
     private void mostrarAlerta(
             Alert.AlertType tipo,
@@ -79,6 +88,30 @@ public class NoteDetailsController implements Initializable{
     }
 
     private void guardar_nota(){
+        if (modoCreacion) {
+            String nombres = texto(tf_nombresapellidos.getText());
+            String correo = texto(tf_correo.getText());
+            String celular = texto(tf_celular.getText());
+            String descripcion = texto(ta_descripcion.getText());
+            String tipo = cb_tipo.getValue();
+            String categoria = cb_categoria.getValue();
+            if (nombres.isEmpty() || correo.isEmpty() || celular.isEmpty() || descripcion.isEmpty()
+                    || tipo == null || categoria == null) {
+                mostrarAlerta(Alert.AlertType.WARNING, "Datos incompletos",
+                        "Completa nombre, correo, celular, tipo, categoría y descripción.");
+                return;
+            }
+            Integer areaId = cb_area.getValue() == null ? null : cb_area.getValue().getIdArea();
+            Notas creada = dao.crearNota(nombres, correo, celular, descripcion, tipo, categoria, areaId);
+            if (creada == null) {
+                mostrarAlerta(Alert.AlertType.ERROR, "No se pudo registrar",
+                        "Revisa que la base de datos tenga tipos, categorías y un estado Pendiente configurados.");
+                return;
+            }
+            mostrarAlerta(Alert.AlertType.INFORMATION, "Caso registrado", "El caso " + creada.getIdNota() + " se registró correctamente.");
+            cerrarVentana();
+            return;
+        }
         if (notaActual == null) {
             mostrarAlerta(
                 Alert.AlertType.ERROR,
@@ -159,6 +192,7 @@ public class NoteDetailsController implements Initializable{
 
     @FXML
     public void marcar_completado(ActionEvent event) {
+        if (modoCreacion) return;
         if (notaActual == null) {
             mostrarAlerta(
                 Alert.AlertType.ERROR,
@@ -224,6 +258,9 @@ public class NoteDetailsController implements Initializable{
 
     public void setNota(Notas nota) {
         this.notaActual = nota;
+        this.modoCreacion = false;
+        lbl_facultad.setVisible(true); lbl_facultad.setManaged(true);
+        cb_facultad.setVisible(true); cb_facultad.setManaged(true);
 
         if (nota == null) {
             return;
@@ -383,7 +420,7 @@ public class NoteDetailsController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // Conserva aquí la inicialización que ya tengas.
+        cargarCatalogos();
 
         tf_nombresapellidos.sceneProperty().addListener(
             (observable, escenaAnterior, escenaNueva) -> {
@@ -401,5 +438,32 @@ public class NoteDetailsController implements Initializable{
         );
 
         cargarAreas();
+    }
+
+    private String texto(String valor) { return valor == null ? "" : valor.trim(); }
+
+    private void cargarCatalogos() {
+        cb_tipo.getItems().setAll(dao.getAll("TiposNota.findAll", TiposNota.class).stream()
+                .map(TiposNota::getNombreTipo).toList());
+        cb_categoria.getItems().setAll(dao.getAll("Clasificaciones.findAll", Clasificaciones.class).stream()
+                .map(Clasificaciones::getNombreClasificacion).toList());
+    }
+
+    /** Prepares the existing case form to register a new case manually. */
+    public void prepararNuevaNota() {
+        modoCreacion = true;
+        notaActual = null;
+        tf_nombresapellidos.clear(); tf_correo.clear(); tf_celular.clear(); ta_descripcion.clear(); ta_observaciones.clear();
+        tf_fechahora.setText(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm")
+                .withZone(ZoneId.systemDefault()).format(java.time.Instant.now()));
+        tf_nombresapellidos.setEditable(true); tf_correo.setEditable(true); tf_celular.setEditable(true); ta_descripcion.setEditable(true);
+        tf_nombresapellidos.setFocusTraversable(true); tf_correo.setFocusTraversable(true); tf_celular.setFocusTraversable(true); ta_descripcion.setFocusTraversable(true);
+        cb_tipo.setDisable(false); cb_categoria.setDisable(false); cb_area.setDisable(false);
+        cb_tipo.setPromptText("Selecciona el tipo"); cb_categoria.setPromptText("Selecciona la categoría"); cb_area.setPromptText("Área o facultad (opcional)");
+        cb_tipo.setValue(null); cb_categoria.setValue(null); cb_area.setValue(null);
+        lbl_facultad.setVisible(false); lbl_facultad.setManaged(false);
+        cb_facultad.setVisible(false); cb_facultad.setManaged(false);
+        checkb1.setDisable(true); checkb2.setDisable(true);
+        if (btn_marcar_completado != null) btn_marcar_completado.setVisible(false);
     }
 }

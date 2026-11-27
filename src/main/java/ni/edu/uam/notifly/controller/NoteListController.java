@@ -276,6 +276,7 @@ public class NoteListController {
         }
 
         try {
+            dao.registrarAccesoNota(notaSeleccionada.getIdNota());
 
             FXMLLoader loader = new FXMLLoader(
                 getClass().getResource(
@@ -311,6 +312,27 @@ public class NoteListController {
                 "Error",
                 "No fue posible abrir los detalles de la nota."
             );
+        }
+    }
+
+    @FXML
+    public void crear_nota(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ni/edu/uam/notifly/notedetails.fxml"));
+            Parent root = loader.load();
+            NoteDetailsController controller = loader.getController();
+            controller.prepararNuevaNota();
+            Stage stage = new Stage();
+            stage.setTitle("Registrar nuevo caso");
+            stage.setScene(new Scene(root));
+            stage.setOnHidden(e -> {
+                controller.cerrarVentanasHijas();
+                cargarNotas();
+            });
+            stage.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+            mostrarAlerta(Alert.AlertType.ERROR, "Error", "No se pudo abrir el formulario para registrar el caso.");
         }
     }
 
