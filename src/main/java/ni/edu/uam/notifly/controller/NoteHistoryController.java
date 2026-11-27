@@ -89,7 +89,8 @@ public class NoteHistoryController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/ni/edu/uam/notifly/notedetails.fxml")); Parent root = loader.load();
             loader.<NoteDetailsController>getController().setNota(nota);
-            Stage stage = new Stage(); stage.setTitle("Detalles del caso " + row.id); stage.setScene(new Scene(root)); stage.show();
+            Stage stage = new Stage(); stage.setTitle("Detalles del caso " + row.id); stage.setScene(new Scene(root));
+            ni.edu.uam.notifly.App.ajustarVentanaSecundaria(stage, 1180, 820); stage.show();
         } catch (IOException e) { e.printStackTrace(); alerta(Alert.AlertType.ERROR, "Error", "No fue posible abrir los detalles del caso."); }
     }
     @FXML public void volver() { try { ni.edu.uam.notifly.App.setRoot("mainscreen"); } catch (IOException e) { alerta(Alert.AlertType.ERROR, "Error", "No se pudo volver al menú principal."); } }

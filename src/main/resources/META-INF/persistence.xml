@@ -8,13 +8,7 @@
     <class>ni.edu.uam.notifly.entity.Contactos</class>
     <class>ni.edu.uam.notifly.entity.TiposNota</class>
     <class>ni.edu.uam.notifly.entity.EstadosNota</class>
-    <class>ni.edu.uam.notifly.entity.EstadosNota_1</class>
-    <class>ni.edu.uam.notifly.entity.Notas_1</class>
     <class>ni.edu.uam.notifly.entity.Checklists</class>
-    <class>ni.edu.uam.notifly.entity.Areas_1</class>
-    <class>ni.edu.uam.notifly.entity.Clasificaciones_1</class>
-    <class>ni.edu.uam.notifly.entity.TiposNota_1</class>
-    <class>ni.edu.uam.notifly.entity.Contactos_1</class>
     <class>ni.edu.uam.notifly.entity.HistorialNotas</class>
     <class>ni.edu.uam.notifly.entity.Accion</class>
     <class>ni.edu.uam.notifly.entity.Seguimiento</class>
@@ -22,7 +16,7 @@
       <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/notifly"/>
       <property name="javax.persistence.jdbc.user" value="postgres"/>
       <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver"/>
-      <property name="javax.persistence.jdbc.password" value="pass"/>
+      <property name="javax.persistence.jdbc.password" value="712199512"/>
       <property name="eclipselink.logging.level" value="FINE"/>
       <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
     </properties>

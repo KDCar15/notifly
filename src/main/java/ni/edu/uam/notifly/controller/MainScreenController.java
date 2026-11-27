@@ -14,6 +14,7 @@ public class MainScreenController {
     @FXML public void mostrar_historial() { abrir("notehistory"); }
     @FXML public void mostrar_contactos() { abrir("contactlist"); }
     @FXML public void mostrar_informes() { abrir("reports"); }
+    @FXML public void mostrar_dashboard() { abrir("dashboard"); }
 
     @FXML
     public void salir() {

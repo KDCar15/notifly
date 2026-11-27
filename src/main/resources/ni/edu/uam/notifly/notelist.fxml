@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.control.DatePicker?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.NoteListController">
+<VBox prefHeight="780.0" prefWidth="1150.0" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.NoteListController">
    <children>
       <HBox alignment="CENTER_LEFT" spacing="12.0"><children><Button mnemonicParsing="false" onAction="#volver" text="← Inicio"/><Label text="Administración de notas"><font><Font name="System Bold" size="18.0"/></font></Label></children></HBox>
       <Label text="Criterios de búsqueda">

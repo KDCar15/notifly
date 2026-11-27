@@ -294,6 +294,7 @@ public class NoteListController {
             Stage stage = new Stage();
             stage.setTitle("Detalles de la nota");
             stage.setScene(new Scene(root));
+            ni.edu.uam.notifly.App.ajustarVentanaSecundaria(stage, 1180, 820);
 
             // Al cerrar NoteDetails también se cierran
             // las ventanas auxiliares que haya abierto.
@@ -325,6 +326,7 @@ public class NoteListController {
             Stage stage = new Stage();
             stage.setTitle("Registrar nuevo caso");
             stage.setScene(new Scene(root));
+            ni.edu.uam.notifly.App.ajustarVentanaSecundaria(stage, 1180, 820);
             stage.setOnHidden(e -> {
                 controller.cerrarVentanasHijas();
                 cargarNotas();

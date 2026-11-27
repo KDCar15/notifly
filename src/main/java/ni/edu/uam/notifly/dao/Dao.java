@@ -9,6 +9,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.persistence.EntityManager;
@@ -515,6 +517,62 @@ public class Dao implements IDao {
         } finally {
             em.close();
         }
+    }
+
+    /** Counts cases by their current status for the administrator dashboard. */
+    public Map<String, Long> contarCasosPorEstado() {
+        return contarCasosPor("gestion.estados_nota", "id_estadonota", "nombre_estado");
+    }
+
+    /** Counts cases by type (complaint, suggestion, or other configured types). */
+    public Map<String, Long> contarCasosPorTipo() {
+        return contarCasosPor("gestion.tipos_nota", "id_tiponota", "nombre_tipo");
+    }
+
+    private Map<String, Long> contarCasosPor(String tabla, String clave, String nombre) {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        try {
+            List<?> rows = em.createNativeQuery("SELECT COALESCE(cat." + nombre + ",'Sin clasificar'), COUNT(*) "
+                    + "FROM gestion.notas n LEFT JOIN " + tabla + " cat ON cat." + clave + "=n." + clave
+                    + " GROUP BY cat." + nombre + " ORDER BY cat." + nombre).getResultList();
+            Map<String, Long> counts = new LinkedHashMap<>();
+            for (Object value : rows) {
+                Object[] row = (Object[]) value;
+                counts.put(String.valueOf(row[0]), ((Number) row[1]).longValue());
+            }
+            return counts;
+        } catch (Exception exception) {
+            System.err.println("No se pudieron resumir los casos para el dashboard:");
+            exception.printStackTrace();
+            return Map.of();
+        } finally { em.close(); }
+    }
+
+    /** Monthly case totals for the most recent six calendar months. */
+    public Map<String, Long> contarCasosPorMes() {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        try {
+            List<?> rows = em.createNativeQuery("SELECT TO_CHAR(DATE_TRUNC('month', fechahora), 'YYYY-MM'), COUNT(*) "
+                    + "FROM gestion.notas WHERE fechahora >= DATE_TRUNC('month', CURRENT_DATE) - INTERVAL '5 months' "
+                    + "GROUP BY DATE_TRUNC('month', fechahora) ORDER BY DATE_TRUNC('month', fechahora)").getResultList();
+            Map<String, Long> counts = new LinkedHashMap<>();
+            for (Object value : rows) {
+                Object[] row = (Object[]) value;
+                counts.put(String.valueOf(row[0]), ((Number) row[1]).longValue());
+            }
+            return counts;
+        } catch (Exception exception) {
+            System.err.println("No se pudieron resumir los casos mensuales:");
+            exception.printStackTrace();
+            return Map.of();
+        } finally { em.close(); }
+    }
+
+    public long contarTotalCasos() {
+        EntityManager em = EntityManagerAdmin.getEntityManager();
+        try { return ((Number) em.createNativeQuery("SELECT COUNT(*) FROM gestion.notas").getSingleResult()).longValue(); }
+        catch (Exception exception) { exception.printStackTrace(); return 0; }
+        finally { em.close(); }
     }
 
     // =================================================

@@ -62,6 +62,7 @@ public class TemplateListController {
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(tv_plantillas.getScene().getWindow());
             stage.setScene(new Scene(root));
+            ni.edu.uam.notifly.App.ajustarVentanaSecundaria(stage, 760, 680);
             stage.setOnHidden(e -> cargar());
             stage.showAndWait();
         } catch (IOException e) { e.printStackTrace(); error("No se pudo abrir el editor de plantillas."); }

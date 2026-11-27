@@ -209,6 +209,7 @@ public class ContactListController {
 
             ventana.setTitle(titulo);
             ventana.setScene(new Scene(root));
+            ni.edu.uam.notifly.App.ajustarVentanaSecundaria(ventana, 760, 560);
 
             ventana.initOwner(ventanaPadre);
             ventana.initModality(Modality.WINDOW_MODAL);

@@ -349,6 +349,8 @@ public class NoteDetailsController implements Initializable{
             Stage nuevaVentana = new Stage();
             nuevaVentana.setTitle(titulo);
             nuevaVentana.setScene(new Scene(root));
+            ni.edu.uam.notifly.App.ajustarVentanaSecundaria(nuevaVentana,
+                    esContactos ? 960 : 1100, esContactos ? 760 : 800);
 
             // La ventana hija pertenece a NoteDetails,
             // pero no bloquea su interacción.
