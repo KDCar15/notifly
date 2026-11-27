@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.NoteHistoryController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" spacing="15.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.NoteHistoryController">
    <children>
-      <HBox alignment="CENTER_LEFT" spacing="12.0"><children><Button mnemonicParsing="false" onAction="#volver" text="← Inicio"/><Label text="Historial de casos"><font><Font name="System Bold" size="18.0"/></font></Label></children></HBox>
+      <HBox alignment="CENTER_LEFT" spacing="12.0"><children><Button mnemonicParsing="false" onAction="#volver" text="← Inicio" /><Label text="Historial de casos"><font><Font name="System Bold" size="18.0" /></font></Label></children></HBox>
       <Label text="Criterios de búsqueda">
          <font>
             <Font name="System Bold" size="13.0" />
@@ -64,7 +64,7 @@
             <Font name="System Bold" size="13.0" />
          </font>
       </Label>
-      <TableView fx:id="tv_resultados" prefHeight="346.0" prefWidth="570.0">
+      <TableView fx:id="tv_resultados" prefWidth="570.0">
         <columns>
           <TableColumn fx:id="tc_acceso" prefWidth="120.0" text="Último acceso" />
             <TableColumn fx:id="tc_id" prefWidth="60.0" text="No." />

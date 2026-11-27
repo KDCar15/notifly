@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="374.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.MainScreenController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="745.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ni.edu.uam.notifly.controller.MainScreenController">
    <children>
       <MenuBar prefWidth="400.0">
         <menus>
@@ -34,7 +34,7 @@
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
          <children>
-            <ImageView fitHeight="200.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="277.0" fitWidth="291.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@logo.png" />
                </image>
@@ -51,11 +51,11 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" onAction="#mostrar_notas" prefHeight="24.0" prefWidth="200.0" text="Notas" />
-                  <Button mnemonicParsing="false" onAction="#mostrar_plantillas" prefHeight="24.0" prefWidth="200.0" text="Plantillas" GridPane.columnIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#mostrar_historial" prefHeight="24.0" prefWidth="200.0" text="Historial" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#mostrar_contactos" prefHeight="24.0" prefWidth="200.0" text="Contactos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button mnemonicParsing="false" onAction="#mostrar_informes" prefHeight="24.0" prefWidth="200.0" text="Informes" GridPane.rowIndex="2" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_notas" prefHeight="48.0" prefWidth="200.0" text="Notas" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_plantillas" prefHeight="48.0" prefWidth="200.0" text="Plantillas" GridPane.columnIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_historial" prefHeight="48.0" prefWidth="200.0" text="Historial" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_contactos" prefHeight="48.0" prefWidth="200.0" text="Contactos" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Button mnemonicParsing="false" onAction="#mostrar_informes" prefHeight="48.0" prefWidth="200.0" text="Informes" GridPane.rowIndex="2" />
                </children>
             </GridPane>
          </children>
